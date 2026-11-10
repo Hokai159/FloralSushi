@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Floral Sushi, sushis faits maison livrés à domicile</title>
+<meta name="description" content="Composez votre box de sushis faits maison, ou choisissez une box déjà faite, livrée à domicile autour d'Amiens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bordeaux:#5f021f; --bordeaux-2:#7d0a2b; --rose:#f1d4e0; --rose-2:#f9e6ee;
+  --paper:#f7f7f9; --white:#ffffff; --ink:#2a0410; --gold:#c99a3b; --mute:#8a6a73;
+  --radius:22px; --shadow:0 18px 40px -18px rgba(95,2,31,.35);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --glass:rgba(255,255,255,.72);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);line-height:1.5;overflow-x:hidden;
+  background:linear-gradient(-45deg,#fbe6ef,#f7f7f9,#f1d4e0,#fdf3e4,#f5e9f0);
+  background-size:400% 400%;background-attachment:fixed;
+  animation:bgShift 24s ease infinite;
+}
+@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;top:-12%;border-radius:80% 0 80% 0;opacity:.75;animation:fall linear infinite}
+@keyframes fall{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(40px,55vh) rotate(260deg)}100%{transform:translate(-30px,115vh) rotate(540deg)}}
+main{position:relative;z-index:1;min-height:70vh}
+img{max-width:100%}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:.95;letter-spacing:-.02em}
+.display{font-weight:800;text-transform:uppercase;font-variation-settings:"opsz" 96}
+
+/* Banderole */
+.ticker{position:relative;z-index:2;background:var(--bordeaux);color:var(--rose);overflow:hidden;white-space:nowrap;padding:10px 0;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem}
+.ticker-track{display:inline-flex;gap:40px;animation:marquee 26s linear infinite;padding-left:40px}
+.ticker span::after{content:"✿";margin-left:40px;color:var(--gold)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* En-tête */
+header{position:sticky;top:0;z-index:20;background:rgba(247,247,249,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;justify-content:space-between;align-items:center;padding:12px clamp(16px,4vw,48px);border-bottom:1px solid rgba(95,2,31,.08);flex-wrap:wrap;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;color:var(--bordeaux);font-size:1.25rem;text-transform:uppercase}
+.logo img{height:46px;width:auto;object-fit:contain}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:600;font-size:.95rem;transition:background .25s var(--ease),color .25s;position:relative}
+nav a:hover{background:var(--rose)}
+nav a.active{background:var(--bordeaux);color:#fff}
+nav .dot{position:absolute;top:-4px;right:-4px;background:var(--gold);color:#fff;border-radius:99px;font-size:.7rem;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px;animation:pop .4s var(--ease)}
+
+.wrap{max-width:1200px;margin:auto;padding:0 clamp(16px,4vw,48px)}
+section{padding:clamp(48px,8vw,96px) 0}
+
+/* Boutons */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;background:var(--bordeaux);color:#fff;border:0;padding:16px 28px;border-radius:999px;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;transition:transform .3s var(--ease),box-shadow .3s,background .3s;box-shadow:0 10px 24px -10px rgba(95,2,31,.6)}
+.btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 30px -12px rgba(95,2,31,.7);background:var(--bordeaux-2)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--bordeaux);box-shadow:none;border:2px solid var(--bordeaux)}
+.btn.ghost:hover{background:var(--bordeaux);color:#fff}
+.btn.gold{background:var(--gold)}
+.btn.sm{padding:11px 18px;font-size:.92rem}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(5px)}
+
+/* Accueil */
+.hero{position:relative;padding:clamp(40px,7vw,90px) 0 clamp(40px,6vw,70px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:min(60vw,640px);aspect-ratio:1;background:radial-gradient(circle at 30% 30%,var(--rose),transparent 65%);z-index:-1;animation:float 9s ease-in-out infinite}
+.hero-kicker{display:inline-block;background:var(--white);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.85rem;color:var(--bordeaux);box-shadow:0 4px 14px -8px rgba(0,0,0,.3);animation:fadeUp .8s var(--ease) both}
+.hero h1{font-size:clamp(3.4rem,11vw,9.5rem);margin:18px 0 22px;color:var(--bordeaux)}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .word{display:inline-block;transform:translateY(110%);animation:rise .9s var(--ease) forwards}
+.hero h1 .word:nth-child(2){animation-delay:.12s}
+.hero h1 .word:nth-child(3){animation-delay:.24s}
+.hero h1 .word:nth-child(4){animation-delay:.36s}
+.hero-sub{max-width:520px;font-size:1.2rem;color:var(--mute);animation:fadeUp .9s .5s var(--ease) both}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;animation:fadeUp .9s .65s var(--ease) both}
+.flower{position:absolute;right:6%;top:18%;width:clamp(140px,22vw,260px);animation:spin 40s linear infinite;opacity:.9}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-22px) rotate(4deg)}}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.section-title{font-size:clamp(2.4rem,6vw,4.6rem);color:var(--bordeaux)}
+.eyebrow{font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--gold);margin-bottom:12px;display:block}
+
+/* Cartes box */
+.boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:40px}
+.box{position:relative;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--radius);padding:28px;overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s;display:flex;flex-direction:column;min-height:320px}
+.box:hover{transform:translateY(-10px) rotate(-.6deg);box-shadow:var(--shadow)}
+.box .num{font-size:clamp(4.5rem,9vw,7rem);font-weight:800;position:absolute;right:14px;top:-6px;line-height:1;color:transparent;-webkit-text-stroke:2px var(--rose);transition:transform .6s var(--ease)}
+.box:hover .num{transform:scale(1.08) rotate(-4deg)}
+.box h3{font-size:2rem;color:var(--bordeaux);position:relative;text-transform:uppercase}
+.box p{color:var(--mute);position:relative}
+.box .price{margin-top:auto;font-size:2.2rem;font-weight:800;color:var(--bordeaux);position:relative;padding-top:12px}
+.box .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;position:relative}
+.box.dark{background:var(--bordeaux);color:var(--rose)}
+.box.dark h3,.box.dark .price{color:#fff}
+.box.dark p{color:var(--rose)}
+.box.dark .num{-webkit-text-stroke:2px rgba(255,255,255,.25)}
+.tag-pre{display:inline-block;background:var(--rose);color:var(--bordeaux);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em;align-self:flex-start;position:relative}
+.offer-tag{display:inline-block;background:var(--gold);color:#fff;font-size:.78rem;font-weight:700;padding:5px 11px;border-radius:999px;margin-top:10px;position:relative}
+.sub-title{font-weight:800;text-transform:uppercase;color:var(--bordeaux);font-size:1.4rem;margin:48px 0 0}
+
+/* Grades */
+.grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:40px}
+.grade{border-radius:var(--radius);padding:30px;min-height:220px;position:relative;overflow:hidden}
+.grade h3{font-size:2.4rem;text-transform:uppercase}
+.grade p{margin:12px 0 0}
+.grade.c{background:var(--rose)}.grade.s{background:var(--bordeaux);color:var(--rose)}.grade.s h3{color:#fff}
+.grade.g{background:linear-gradient(135deg,#e7c27a,var(--gold))}
+
+/* Bande défilante */
+.band{background:var(--ink);color:var(--paper);padding:26px 0;overflow:hidden;white-space:nowrap;transform:rotate(-2deg);margin:40px -20px;position:relative;z-index:1}
+.band .track{display:inline-flex;animation:marquee 30s linear infinite reverse}
+.band span{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;text-transform:uppercase;padding-right:40px}
+.band span em{font-style:normal;color:var(--gold)}
+
+/* En-têtes de page */
+.page-head{padding:clamp(36px,6vw,60px) 0 20px}
+.page-head h1{font-size:clamp(3rem,8vw,6.5rem);color:var(--bordeaux)}
+.page-head p{color:var(--mute);max-width:620px;font-size:1.1rem}
+
+/* Onglets */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.tabs a{text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:700;color:var(--bordeaux);background:var(--glass);border:2px solid transparent;transition:all .3s var(--ease)}
+.tabs a:hover{border-color:var(--bordeaux)}
+.tabs a.on{background:var(--bordeaux);color:#fff}
+
+/* Sections de grade et items */
+.gtitle{display:flex;align-items:baseline;gap:14px;margin:48px 0 18px;flex-wrap:wrap}
+.gtitle h2{font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;color:var(--bordeaux)}
+.gtitle .count{font-weight:800;background:var(--rose);color:var(--bordeaux);padding:4px 12px;border-radius:999px;font-size:.95rem}
+.gtitle .sup{color:var(--gold);font-weight:700}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.item{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:6px;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;border:2px solid transparent}
+.item:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.item.picked{border-color:var(--bordeaux)}
+.item .head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.item b{font-size:1.1rem;line-height:1.2}
+.item small{color:var(--mute);font-size:.88rem;flex:1}
+.item .type{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:700}
+.item .price-tag{font-weight:800;color:var(--bordeaux)}
+.info-btn{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordeaux);background:#fff;color:var(--bordeaux);font-weight:800;font-family:Georgia,serif;cursor:pointer;transition:all .2s var(--ease)}
+.info-btn:hover{background:var(--bordeaux);color:#fff;transform:scale(1.1)}
+.qty{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.qty .n{font-weight:800;font-size:1.3rem;min-width:30px;text-align:center}
+.qty .n.pop{animation:pop .35s var(--ease)}
+.qty button{width:44px;height:44px;border-radius:50%;border:0;background:var(--rose);color:var(--bordeaux);font-size:1.4rem;font-weight:700;cursor:pointer;transition:transform .2s var(--ease),background .2s}
+.qty button:hover:not(:disabled){background:var(--bordeaux);color:#fff;transform:scale(1.12)}
+.qty button:disabled{opacity:.3;cursor:not-allowed}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.size{border:2px solid var(--bordeaux);background:#fff;color:var(--bordeaux);border-radius:999px;padding:7px 13px;font:inherit;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s var(--ease)}
+.size.on{background:var(--bordeaux);color:#fff}
+.link-btn{background:none;border:0;padding:0;color:var(--bordeaux);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+
+/* Fiche ingrédients (modale) */
+.modal{position:fixed;inset:0;background:rgba(42,4,16,.55);backdrop-filter:blur(6px);display:grid;place-items:center;z-index:60;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-card{background:#fff;border-radius:26px;max-width:520px;width:100%;padding:30px;position:relative;transform:translateY(30px) scale(.97);transition:transform .45s var(--ease);max-height:90vh;overflow:auto}
+.modal.open .modal-card{transform:none}
+.modal-close{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:0;background:var(--rose);color:var(--bordeaux);font-size:1.3rem;cursor:pointer}
+.modal h2{font-size:2.2rem;color:var(--bordeaux);text-transform:uppercase;padding-right:40px}
+.modal h3{font-size:1rem;color:var(--bordeaux);text-transform:uppercase;margin:18px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{background:var(--rose);color:var(--bordeaux);padding:6px 12px;border-radius:999px;font-weight:700;font-size:.85rem}
+.chip.none{background:#eef6ee;color:#2f6b3a}
+.allergen-note{font-size:.82rem;color:var(--mute);margin-top:14px;border-top:1px solid #eee;padding-top:12px}
+
+/* Barre collante */
+.dock{position:sticky;bottom:14px;margin-top:40px;background:var(--ink);color:#fff;border-radius:999px;padding:12px 12px 12px 24px;display:flex;align-items:center;gap:20px;box-shadow:0 20px 40px -16px rgba(42,4,16,.6);z-index:15;flex-wrap:wrap}
+.dock .info{flex:1;min-width:200px}
+.dock .track2{height:8px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden;margin-top:8px}
+.dock .track2 span{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--gold));transition:width .5s var(--ease)}
+.dock .total{font-weight:800;font-size:1.3rem}
+.dock .btn{background:var(--rose);color:var(--bordeaux);box-shadow:none}
+.dock .btn:hover{background:#fff}
+
+.preset-note{background:var(--rose);color:var(--bordeaux);padding:14px 18px;border-radius:16px;font-weight:600;margin-top:16px}
+
+/* Panneaux, panier */
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+.panel{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--radius);padding:clamp(20px,3vw,32px);margin-bottom:20px}
+.panel h2{font-size:1.9rem;text-transform:uppercase;color:var(--bordeaux);margin-bottom:14px}
+.panel p{margin:0 0 12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed #e4d6dc}
+.row:last-child{border-bottom:0}
+.row small{display:block;color:var(--mute)}
+.row.offer{color:var(--bordeaux);font-weight:700}
+.row.fee{color:var(--mute)}
+.row.offer small{display:block;color:var(--mute);font-weight:400}
+.switch{position:relative;display:inline-block;width:58px;height:32px;flex:none}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.switch .knob{position:absolute;inset:0;background:#e4d6dc;border-radius:99px;transition:background .3s}
+.switch .knob::before{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .3s var(--ease);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.switch input:checked + .knob{background:var(--bordeaux)}
+.switch input:checked + .knob::before{transform:translateX(26px)}
+.switch input:focus-visible + .knob{box-shadow:0 0 0 4px var(--rose)}
+.trash{background:none;border:0;cursor:pointer;font-size:1.1rem;padding:4px 6px;border-radius:8px;transition:transform .2s var(--ease),background .2s}
+.trash:hover{background:var(--rose);transform:scale(1.15)}
+.row-end{display:flex;align-items:center;gap:6px}
+.trash-btn{margin-top:14px;background:transparent;border:2px solid var(--bordeaux);color:var(--bordeaux);border-radius:999px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer;transition:all .25s var(--ease)}
+.trash-btn:hover{background:var(--bordeaux);color:#fff}
+.size-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px dashed #ead9df}
+.size-label{font-weight:700}
+.size-label em{font-style:normal;color:var(--gold);margin-left:4px}
+.size-row .qty{margin-top:0}
+.tip{background:var(--glass);backdrop-filter:blur(10px);border-radius:var(--radius);padding:20px 22px;margin-bottom:20px}
+.tip-head{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.tip-head small{display:block;color:var(--mute)}
+.tip-msg{margin-top:14px;background:var(--rose);color:var(--bordeaux);padding:12px 14px;border-radius:14px;font-weight:600}
+label{display:block;font-size:.9rem;font-weight:600;margin:14px 0 6px;color:var(--bordeaux)}
+input,select{width:100%;padding:14px 16px;border:2px solid #ead9df;border-radius:14px;font:inherit;font-size:1rem;background:rgba(255,255,255,.9);transition:border-color .25s,box-shadow .25s}
+input:focus,select:focus{outline:none;border-color:var(--bordeaux);box-shadow:0 0 0 4px var(--rose)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.two{grid-template-columns:1fr}.flower{opacity:.25}nav{width:100%;justify-content:center}header{justify-content:center}}
+.summary{position:sticky;top:120px}
+.total-big{font-size:2.6rem;font-weight:800;color:var(--bordeaux);line-height:1;margin:6px 0 18px}
+.notice{background:var(--rose);color:var(--bordeaux);padding:16px 18px;border-radius:16px;font-weight:600}
+.notice a{color:var(--bordeaux)}
+.note{color:var(--mute);font-size:.9rem}
+.ok-badge{display:inline-grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--bordeaux);color:#fff;font-size:2.4rem;animation:pop .6s var(--ease)}
+
+/* Contact */
+.contact-list{display:grid;gap:14px;margin-top:20px}
+.contact-line{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:16px 18px;text-decoration:none;color:var(--ink);transition:transform .3s var(--ease),box-shadow .3s}
+.contact-line:hover{transform:translateX(6px);box-shadow:var(--shadow)}
+.contact-line .ico{width:44px;height:44px;border-radius:50%;background:var(--rose);display:grid;place-items:center;font-size:1.2rem;flex:none}
+.contact-line b{display:block}
+.contact-line small{color:var(--mute)}
+.placeholder{background:#fff3cd;padding:0 6px;border-radius:6px;font-weight:600;color:#7a5a00}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,160%);background:var(--ink);color:#fff;padding:14px 22px;border-radius:999px;font-weight:600;transition:transform .5s var(--ease);z-index:70;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+
+/* Pied de page */
+footer{position:relative;z-index:1;background:var(--bordeaux);color:var(--rose);padding:60px 0 30px;margin-top:60px}
+footer .big{font-size:clamp(3rem,10vw,8rem);font-weight:800;text-transform:uppercase;color:#fff;line-height:.85}
+footer .links{display:flex;gap:20px;flex-wrap:wrap;margin-top:30px}
+footer a{color:var(--rose);text-decoration:none;font-weight:600}
+footer a:hover{color:#fff;text-decoration:underline}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.petals{display:none}}
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Fait maison chaque jour</span><span>Livraison autour d'Amiens</span><span>Créations uniques</span><span>Composez ou choisissez une box</span>
+    <span>Fait maison chaque jour</span><span>Livraison autour d'Amiens</span><span>Créations uniques</span><span>Composez ou choisissez une box</span>
+  </div>
+</div>
+
+<header>
+  <a class="logo" href="#accueil">
+    <img src="https://floralsushi.wordpress.com/wp-content/uploads/2025/05/bbafc540-c0f9-46c4-9db6-8e2820fef0d0-1.jpg" alt="Floral Sushi" onerror="this.remove()">
+    Floral Sushi
+  </a>
+  <nav>
+    <a href="#accueil" data-nav="accueil">Accueil</a>
+    <a href="#boxes" data-nav="boxes">Nos box</a>
+    <a href="#composer" data-nav="composer">Composer</a>
+    <a href="#carte" data-nav="carte">Carte</a>
+    <a href="#extras" data-nav="extras">Extras</a>
+    <a href="#panier" data-nav="panier">Panier</a>
+    <a href="#profil" data-nav="profil">Mon profil</a>
+  </nav>
+</header>
+
+<main id="view"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Floral<br>Sushi</div>
+    <p style="max-width:460px;color:var(--rose)">Sushis préparés à la maison, livrés chez vous autour d'Amiens.</p>
+    <div class="links"><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="#mentions">Mentions légales</a></div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeItem()">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== CARTE ===== */
+const MENU = {
+  Classique: [
+    ["California Saumon Fromage","Saumon, fromage"],
+    ["California Saumon Avocat","Saumon, avocat"],
+    ["California Smoky","Saumon fumé, cheese, ciboulette"],
+    ["California Vegetable","Légumes de saison"],
+    ["California Thon Avocat","Thon, avocat"],
+    ["Californian Thon Boursin","Thon, boursin"],
+    ["California Poulet Fromage","Poulet, fromage"],
+    ["Maki Saumon Avocat Fromage Poivron chèvre","Saumon, avocat, fromage, poivron, chèvre"]
+  ],
+  Signature: [
+    ["California Chicken","Poulet, carotte, oignon, cheese, salade, oignons frits, sauce algérienne"],
+    ["California Avocado Saumon","Saumon, cheese, crème d'avocat"],
+    ["California Salmon Spicy","Saumon, cheese, sauce mayo spicy, oignons frits"],
+    ["California Mimosa","Oeuf, thon, cheese, asperge, mayonnaise"],
+    ["California Tempura","Crevette tempura, cheese, avocat, mayonnaise"],
+    ["California Avocado Poulet Karaage","Poulet karaage, cheese, crème d'avocat, mayonnaise"],
+    ["California Aburi Roll","Saumon, avocat, saumon flambé, cheese"],
+    ["California Italia Fusion","Tomate séchée, chèvre, jambon cru, pesto vert"]
+  ],
+  Golden: [
+    ["Golden Poulet Cheddar","Poulet, cheddar, cheese, frit"],
+    ["Golden Atlantic Spicy","Saumon, crevette, cheese, mayo spicy, frit"],
+    ["Golden Campagnard","Poulet, chèvre, miel, frit"]
+  ]
+};
+const GOLDEN_SUPPLEMENT = 10;   // € par rouleau Golden dans les box à composer
+const DELIVERY_FEE = 2;         // € de livraison, ajoutés à la commande
+const GRADES = ["Classique","Signature","Golden"];
+
+/* Allergènes : base indicative (sauce soja) + ingrédients listés */
+const A = (...extra) => ["Gluten","Soja", ...extra];
+const ALLERGENES = {
+  "California Saumon Fromage": A("Poisson","Lait"),
+  "California Saumon Avocat": A("Poisson"),
+  "California Smoky": A("Poisson","Lait"),
+  "California Vegetable": A(),
+  "California Thon Avocat": A("Poisson"),
+  "Californian Thon Boursin": A("Poisson","Lait"),
+  "California Poulet Fromage": A("Lait"),
+  "Maki Saumon Avocat Fromage Poivron chèvre": A("Poisson","Lait"),
+  "California Chicken": A("Œufs","Moutarde","Lait"),
+  "California Avocado Saumon": A("Poisson","Lait"),
+  "California Salmon Spicy": A("Poisson","Lait","Œufs"),
+  "California Mimosa": A("Œufs","Poisson","Lait"),
+  "California Tempura": A("Crustacés","Œufs","Lait"),
+  "California Avocado Poulet Karaage": A("Œufs","Lait"),
+  "California Aburi Roll": A("Poisson","Lait"),
+  "California Italia Fusion": A("Lait"),
+  "Golden Poulet Cheddar": A("Œufs","Lait"),
+  "Golden Atlantic Spicy": A("Poisson","Crustacés","Œufs","Lait"),
+  "Golden Campagnard": A("Œufs","Lait")
+};
+
+/* Onglets de la carte */
+const TYPES = [
+  {id:"tous", label:"Tous"},
+  {id:"california", label:"California roll"},
+  {id:"maki", label:"Maki"},
+  {id:"frits", label:"Frits (Golden)"}
+];
+function typeOf(name, grade) {
+  if (grade === "Golden") return "frits";
+  if (name.startsWith("Maki")) return "maki";
+  return "california";
+}
+function typeLabel(id) { return TYPES.find(t => t.id === id)?.label || ""; }
+
+/* Box à composer et box préfaites */
+const BOXES = {
+  mini: {name:"Mini box", pieces:8, price:25, quota:{Classique:4, Signature:3, Golden:1}, desc:"8 pièces, à composer dans les 3 grades."},
+  uno:  {name:"Uno box",  pieces:16, price:45, quota:{Classique:8, Signature:6, Golden:2}, offer:true, desc:"16 pièces, l'équilibre entre les grades."},
+  duo:  {name:"Duo box",  pieces:32, price:85, quota:{Classique:16,Signature:12,Golden:4}, offer:true, desc:"32 pièces, pour partager ou faire le plein."},
+
+  decouverte_mini: {name:"Mini Découverte", pieces:8, price:22, fixed:true, desc:"8 sushis différents, une pièce de chaque."},
+  decouverte_uno:  {name:"Uno Découverte",  pieces:16, price:42, fixed:true, offer:true, desc:"Toute la carte Classique et Signature, une pièce de chaque."},
+  decouverte_duo:  {name:"Duo Découverte",  pieces:32, price:80, fixed:true, offer:true, desc:"Toute la carte Classique et Signature, deux pièces de chaque."},
+
+  full_poulet:  {name:"Mini Full Poulet",  pieces:8, price:25, fixed:true, desc:"8 pièces 100 % poulet : poulet fromage, chicken, karaage."},
+  full_fromage: {name:"Mini Full Fromage", pieces:8, price:22, fixed:true, desc:"8 pièces 100 % fromage : saumon fromage, smoky, thon boursin, maki."},
+  full_frit:    {name:"Mini Full Frit",    pieces:8, price:45, fixed:true, desc:"8 pièces frites : poulet cheddar, atlantic spicy, campagnard. Supplément Golden inclus.", offer:true}
+};
+
+// Offres par box : [paires de baguettes, sauces], offertes avec la box
+const OFFERS = {
+  mini:[0,0], uno:[1,1], duo:[2,2],
+  decouverte_mini:[0,0], decouverte_uno:[1,1], decouverte_duo:[2,2],
+  full_poulet:[0,0], full_fromage:[0,0], full_frit:[1,1]
+};
+for (const id in BOXES) {
+  BOXES[id].baguettes = OFFERS[id][0];
+  BOXES[id].sauces = OFFERS[id][1];
+}
+const baguetteTag = b => `${b.baguettes ? `<span class="offer-tag">🥢 ${b.baguettes} paire${b.baguettes>1?"s":""} de baguettes offerte${b.baguettes>1?"s":""}</span>` : ""}${b.sauces ? `<span class="offer-tag">🥫 ${b.sauces} sauce${b.sauces>1?"s":""} offerte${b.sauces>1?"s":""}</span>` : ""}`;
+
+const PRESETS = {
+  decouverte_mini: {
+    "California Saumon Fromage":1,"California Saumon Avocat":1,"California Smoky":1,"California Thon Avocat":1,
+    "California Chicken":1,"California Avocado Saumon":1,"California Tempura":1,"California Italia Fusion":1
+  },
+  decouverte_uno: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,1])),
+  decouverte_duo: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,2])),
+  full_poulet:  {"California Poulet Fromage":3,"California Chicken":3,"California Avocado Poulet Karaage":2},
+  full_fromage: {"California Saumon Fromage":2,"California Smoky":2,"Californian Thon Boursin":2,"Maki Saumon Avocat Fromage Poivron chèvre":2},
+  full_frit:    {"Golden Poulet Cheddar":3,"Golden Atlantic Spicy":3,"Golden Campagnard":2}
+};
+
+/* Extras : un seul bloc par produit, le format se choisit dans la carte */
+const EXTRA_ITEMS = {
+  karaage: {name:"Poulet karaage", desc:"Croustillant, à partager ou à garder.", group:"Poulet",
+            sizes:[{n:4,price:6.5},{n:8,price:12}], allergens:["Gluten","Soja","Œufs"]}
+};
+EXTRA_ITEMS.baguettes = {name:"Baguettes à sushi", desc:"Une paire de baguettes pour manger.", group:"Accessoires",
+  sizes:[{n:1,price:0.5}], allergens:[], plain:true};
+EXTRA_ITEMS.tempura = {name:"Tempura crevettes", desc:"Crevettes en tempura croustillantes.", group:"Friture",
+  sizes:[{n:2,price:3.5},{n:4,price:6.5}], allergens:["Crustacés","Gluten","Œufs","Soja"]};
+EXTRA_ITEMS.rings = {name:"Oignon rings", desc:"Rondelles d'oignon croustillantes.", group:"Friture",
+  sizes:[{n:4,price:4.5},{n:8,price:8.5}], allergens:["Gluten","Œufs","Lait"]};
+EXTRA_ITEMS.sauce = {name:"Sauce", desc:"Choisissez sucrée ou salée, 0,20 € la sauce.", group:"Sauces",
+  sizes:[{n:"sucree",label:"Sucrée",price:0.2},{n:"salee",label:"Salée",price:0.2}], allergens:["Soja"]};
+const FLAVORS = ["Matcha","Fraise","Vanille","Chocolat","Mangue"]; // parfums à confirmer
+FLAVORS.forEach(f => {
+  EXTRA_ITEMS["mochi_" + f.toLowerCase()] = {name:"Mochi " + f.toLowerCase(), desc:"Mochi glacé " + f.toLowerCase() + ".", group:"Mochi",
+    sizes:[{n:1,price:3.5},{n:2,price:6.5}], allergens:["Lait","Œufs"]};
+});
+const DEFAULT_SIZE = key => EXTRA_ITEMS[key].sizes[0].n;
+const sizePrice = (key, size) => EXTRA_ITEMS[key].sizes.find(s => String(s.n) === String(size)).price;
+const sizeLabel = (key, size) => { const x = EXTRA_ITEMS[key].sizes.find(s => String(s.n) === String(size)); return x.label || "×" + x.n; };
+
+const ZONE_VILLES = ["Amiens","Camon","Longueau","Salouël","Dury","Glisy","Rivery","Saleux","Boves"];
+
+const gradeOf = {};
+for (const g in MENU) MENU[g].forEach(([n]) => gradeOf[n] = g);
+const ingredientsOf = {};
+for (const g in MENU) MENU[g].forEach(([n,i]) => ingredientsOf[n] = i);
+
+/* ===== ETAT ===== */
+const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const store = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+let cart = load("fs_cart", {box:null, mode:null, picks:{}, extras:{}});
+cart.extras ||= {};
+cart.tip ||= {on:false, amount:0};
+for (const k in cart.extras) {
+  const e = cart.extras[k];
+  if (!EXTRA_ITEMS[k] || typeof e !== "object" || typeof e.qty === "number") delete cart.extras[k];
+}
+let session = load("fs_session", null);
+let profile = null;
+const users = () => load("fs_users", {});
+function refreshProfile() { const u = session && users()[session]; profile = u ? (u.profile || null) : null; }
+refreshProfile();
+const eur = n => n.toFixed(2).replace(".", ",") + " €";
+const esc = v => (v ?? "").toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const jsStr = s => s.replace(/\\/g,"\\\\").replace(/'/g,"\\'");
+
+/* ===== CALCULS ===== */
+function counts() {
+  const c = {Classique:0, Signature:0, Golden:0, total:0};
+  for (const n in cart.picks) { const p = cart.picks[n]; c[gradeOf[n]] += p; c.total += p; }
+  return c;
+}
+function boxTotal() {
+  if (!cart.box) return 0;
+  const b = BOXES[cart.box];
+  if (b.fixed) return b.price;
+  let t = b.price;
+  for (const n in cart.picks) if (gradeOf[n] === "Golden") t += GOLDEN_SUPPLEMENT * cart.picks[n];
+  return t;
+}
+function extraLines() {
+  const out = [];
+  for (const k in cart.extras) for (const size in cart.extras[k]) {
+    const q = cart.extras[k][size];
+    if (q > 0) out.push([k, {size, qty: q}]);
+  }
+  return out;
+}
+function extrasTotal() { return extraLines().reduce((t,[k,e]) => t + sizePrice(k, e.size) * e.qty, 0); }
+function hasExtras() { return extraLines().length > 0; }
+function deliveryFee() { return (cart.box || hasExtras()) ? DELIVERY_FEE : 0; }
+function tipAmount() { return cart.tip && cart.tip.on ? cart.tip.amount : 0; }
+function grandTotal() { return boxTotal() + extrasTotal() + deliveryFee() + tipAmount(); }
+function isComplete() {
+  if (!cart.box) return false;
+  const b = BOXES[cart.box], c = counts();
+  if (b.fixed) return c.total === b.pieces;
+  return c.total === b.pieces && GRADES.every(g => c[g] === b.quota[g]);
+}
+function canCheckout() {
+  if (cart.box) return isComplete();
+  return hasExtras();
+}
+function cartCount() {
+  return Object.values(cart.picks).reduce((a,b)=>a+b,0) + extraLines().reduce((a,[,e])=>a+e.qty,0);
+}
+
+/* ===== ACTIONS ===== */
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(window._tt); window._tt = setTimeout(() => t.classList.remove("show"), 2600);
+}
+function chooseBox(id) {
+  const b = BOXES[id];
+  if (b.fixed) {
+    cart.box = id; cart.mode = "fixed"; cart.picks = {...PRESETS[id]};
+    store("fs_cart", cart);
+    toast(b.name + " ajoutée ✓ Ajoutez des extras si vous voulez.");
+    location.hash = "extras";
+    return;
+  }
+  cart.box = id; cart.mode = "custom"; cart.picks = {};
+  store("fs_cart", cart);
+  toast(b.name + " : composez-la !");
+  location.hash = "composer";
+}
+function canAdd(name) {
+  const b = BOXES[cart.box], c = counts();
+  const g = gradeOf[name];
+  return c.total < b.pieces && c[g] < b.quota[g];
+}
+function changePick(name, d) {
+  if (d > 0 && !canAdd(name)) {
+    const b = BOXES[cart.box], c = counts();
+    if (c.total >= b.pieces) toast("Votre box est pleine.");
+    else toast("Quota " + gradeOf[name] + " atteint pour cette box.");
+    return;
+  }
+  const v = (cart.picks[name] || 0) + d;
+  if (v <= 0) delete cart.picks[name]; else cart.picks[name] = v;
+  store("fs_cart", cart); render();
+}
+function changeExtra(key, size, d) {
+  const entry = cart.extras[key] || {};
+  const q = Math.max(0, (entry[size] || 0) + d);
+  if (q === 0) delete entry[size]; else entry[size] = q;
+  if (Object.keys(entry).length) cart.extras[key] = entry; else delete cart.extras[key];
+  store("fs_cart", cart); render();
+}
+function removeExtra(key, size) {
+  const entry = cart.extras[key] || {};
+  delete entry[size];
+  if (Object.keys(entry).length) cart.extras[key] = entry; else delete cart.extras[key];
+  store("fs_cart", cart); toast("Retiré du panier"); render();
+}
+let draft = {};
+function saveDraft(form) {
+  draft = {};
+  new FormData(form).forEach((v, k) => draft[k] = v);
+}
+function clearBox() {
+  cart.box = null; cart.mode = null; cart.picks = {};
+  store("fs_cart", cart); toast("Box retirée du panier"); render();
+}
+function clearCart() {
+  cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}};
+  store("fs_cart", cart); toast("Panier vidé"); render();
+}
+function extraRow(k, e) {
+  return `<div class="row"><span>${e.qty} × ${EXTRA_ITEMS[k].name} (${sizeLabel(k,e.size)})</span><span class="row-end">${eur(sizePrice(k,e.size)*e.qty)}<button class="trash" onclick="removeExtra('${k}','${e.size}')" aria-label="Retirer ${EXTRA_ITEMS[k].name}">🗑</button></span></div>`;
+}
+function toggleTip(on) {
+  cart.tip = {on, amount: on ? cart.tip.amount : 0};
+  store("fs_cart", cart); render();
+}
+function setTip(amount) {
+  cart.tip = {on:true, amount};
+  store("fs_cart", cart); render();
+}
+function setCustomTip(value) {
+  const n = Math.round(parseFloat(String(value).replace(",", ".")) * 100) / 100;
+  if (!(n > 0)) { toast("Entrez un montant supérieur à 0."); render(); return; }
+  cart.tip = {on:true, amount:n};
+  store("fs_cart", cart); render();
+}
+async function hashPwd(email, pwd) {
+  const data = new TextEncoder().encode("fs|" + email.toLowerCase() + "|" + pwd);
+  if (window.crypto && crypto.subtle) {
+    const buf = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+  let h = 5381; for (const b of data) h = ((h * 33) ^ b) >>> 0;   // repli si le navigateur bloque le chiffrement
+  return "djb2-" + h.toString(16);
+}
+async function register(e) {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const email = (f.get("email") || "").trim().toLowerCase();
+  const pwd = f.get("pwd") || "", pwd2 = f.get("pwd2") || "";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast("Adresse email invalide.");
+  if (pwd.length < 6) return toast("Mot de passe : 6 caractères minimum.");
+  if (pwd !== pwd2) return toast("Les mots de passe ne correspondent pas.");
+  const all = users();
+  if (all[email]) return toast("Un compte existe déjà avec cet email. Connectez-vous.");
+  all[email] = {hash: await hashPwd(email, pwd), profile: null};
+  store("fs_users", all);
+  session = email; store("fs_session", session);
+  refreshProfile(); toast("Compte créé ✓ Bienvenue !"); render();
+}
+async function login(e) {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const email = (f.get("email") || "").trim().toLowerCase();
+  const pwd = f.get("pwd") || "";
+  const u = users()[email];
+  if (!u || u.hash !== await hashPwd(email, pwd)) return toast("Email ou mot de passe incorrect.");
+  session = email; store("fs_session", session);
+  refreshProfile(); toast("Connexion réussie ✓"); render();
+}
+function logout() {
+  session = null; store("fs_session", null);
+  refreshProfile(); toast("Vous êtes déconnecté"); render();
+}
+function authView() {
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Mon compte</span>
+    <h1 class="display">Créer mon compte</h1>
+    <p>Avec votre email et un mot de passe, retrouvez vos adresses et votre moyen de paiement à chaque commande.</p>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    <div class="two-col">
+      <form class="panel reveal" onsubmit="register(event)">
+        <h2>Nouveau compte</h2>
+        <label>Adresse email</label><input type="email" name="email" required autocomplete="email">
+        <label>Mot de passe (6 caractères minimum)</label><input type="password" name="pwd" minlength="6" required autocomplete="new-password">
+        <label>Confirmer le mot de passe</label><input type="password" name="pwd2" minlength="6" required autocomplete="new-password">
+        <div style="text-align:right;margin-top:20px"><button class="btn" type="submit">Créer mon compte <span class="arrow">→</span></button></div>
+      </form>
+      <form class="panel reveal" onsubmit="login(event)">
+        <h2>J'ai déjà un compte</h2>
+        <label>Adresse email</label><input type="email" name="email" required autocomplete="email">
+        <label>Mot de passe</label><input type="password" name="pwd" required autocomplete="current-password">
+        <div style="text-align:right;margin-top:20px"><button class="btn ghost" type="submit">Se connecter <span class="arrow">→</span></button></div>
+      </form>
+    </div>
+    <p class="note" style="margin-top:16px">Démonstration : le compte est enregistré dans ce navigateur uniquement.</p>
+  </div></section>`;
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  if (!session) return toast("Créez un compte ou connectez-vous.");
+  const f = new FormData(e.target);
+  const last4 = (f.get("last4") || "").replace(/\D/g,"").slice(-4);
+  const p = {
+    nom:f.get("nom"), tel:f.get("tel"), rue:f.get("rue"), numero:f.get("numero"),
+    complement:f.get("complement"), cp:f.get("cp"), ville:(f.get("ville")||"").trim(),
+    card: last4.length === 4 ? {brand: f.get("brand") || "Carte", last4} : (profile && profile.card) || null
+  };
+  const all = users(); all[session].profile = p; store("fs_users", all);
+  refreshProfile(); toast("Profil enregistré ✓"); render();
+}
+function clearCard() { if (!session) return; const all = users(); all[session].profile.card = null; store("fs_users", all); refreshProfile(); toast("Moyen de paiement supprimé"); render(); }
+const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyNv24HRDDKVsqmHQhAIehwEMplJ0NoCITVfQRVOir-Z7h72RIzmzaalpUnP06OHsL6FA/exec";   // URL du script Google Sheets (à renseigner)
+const SHOP_PHONE = "";        // numéro WhatsApp de la boutique, format 33 6 XX XX XX XX sans espaces (à renseigner)
+async function sendOrder(order) {
+  if (!ORDER_ENDPOINT) return false;
+  try {
+    await fetch(ORDER_ENDPOINT, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain"}, body: JSON.stringify(order)});
+    return true;
+  } catch { return false; }
+}
+function orderText(o) {
+  const lines = [`Commande ${o.id} — ${o.nom}`, `Tél : ${o.tel}`, ...(o.resume || [])];
+  lines.push(`Adresse : ${o.address.numero} ${o.address.rue}${o.address.complement ? ", " + o.address.complement : ""}, ${o.address.cp} ${o.address.ville}`);
+  lines.push(`Créneau : ${o.slot}`);
+  lines.push(`Total : ${eur(o.total)}`);
+  return lines.join("\n");
+}
+function displayName(k, size) {
+  const e = EXTRA_ITEMS[k];
+  if (e.plain) return e.name;
+  const sz = e.sizes.find(x => String(x.n) === String(size));
+  return sz.label ? `${e.name} ${sz.label.toLowerCase()}` : `${e.name} ×${sz.n}`;
+}
+function emojiOf(k) {
+  if (k.startsWith("mochi")) return "🍡";
+  if (k === "karaage") return "🍗";
+  if (k === "tempura") return "🍤";
+  if (k === "rings") return "🧅";
+  if (k === "sauce") return "🥫";
+  if (k === "baguettes") return "🥢";
+  return "🍣";
+}
+function buildResume(box, offered) {
+  const L = [];
+  if (box) {
+    L.push(`📦 ${box.name}`);
+    for (const n in cart.picks) L.push(`   • ${cart.picks[n]} × ${n}`);
+  }
+  const groups = {};
+  const get = (id, name, emoji, unit) => groups[id] || (groups[id] = {name, emoji, unit, total:0, paid:0, off:0, parts:[]});
+  for (const [k, e] of extraLines()) {
+    const ex = EXTRA_ITEMS[k];
+    const sz = ex.sizes.find(x => String(x.n) === String(e.size));
+    const isSauce = k === "sauce";
+    const id = isSauce ? "sauce-" + sz.n : k;
+    const name = isSauce ? "Sauce " + sz.label.toLowerCase() : ex.name;
+    const unit = isSauce ? "sauce(s)" : (ex.plain ? "paire(s)" : "pièce(s)");
+    const g = get(id, name, emojiOf(k), unit);
+    const pieces = e.qty * (typeof sz.n === "number" && !ex.plain ? sz.n : 1);
+    g.paid += pieces; g.total += pieces;
+    if (!isSauce && !ex.plain) g.parts.push(`${e.qty} pack${e.qty > 1 ? "s" : ""} de ${sz.n}`);
+  }
+  if (offered.sucree) { const g = get("sauce-sucree", "Sauce sucrée", "🥫", "sauce(s)"); g.off += offered.sucree; g.total += offered.sucree; }
+  if (offered.salee)  { const g = get("sauce-salee", "Sauce salée", "🥫", "sauce(s)"); g.off += offered.salee; g.total += offered.salee; }
+  if (box && box.baguettes) { const g = get("baguettes", "Baguettes à sushi", "🥢", "paire(s)"); g.off += box.baguettes; g.total += box.baguettes; }
+
+  const list = Object.values(groups);
+  if (list.length) {
+    L.push("", "🛒 Extras");
+    for (const g of list) {
+      L.push(`${g.emoji} ${g.name} : ${g.total} ${g.unit}`);
+    }
+  }
+  return L;
+}
+async function placeOrder(e) {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const addr = {rue:f.get("rue"), numero:f.get("numero"), complement:f.get("complement"), cp:f.get("cp"), ville:(f.get("ville")||"").trim()};
+  if (!ZONE_VILLES.map(v=>v.toLowerCase()).includes(addr.ville.toLowerCase())) {
+    toast("Désolé, nous ne livrons pas encore à cette ville."); return;
+  }
+  if (!f.get("slot")) { toast("Choisissez un créneau de livraison."); return; }
+  if (!/^[0-9+\s.()-]{8,}$/.test(f.get("tel") || "")) { toast("Numéro de téléphone invalide."); return; }
+  const box = cart.box ? BOXES[cart.box] : null;
+  const offered = {sucree: parseInt(f.get("sauce_sucree"), 10) || 0, salee: parseInt(f.get("sauce_salee"), 10) || 0};
+  if (box && offered.sucree + offered.salee > box.sauces) { toast(`Maximum ${box.sauces} sauce(s) offerte(s) avec cette box.`); return; }
+  if (!box && offered.sucree + offered.salee > 0) { toast("Aucune sauce offerte sans box."); return; }
+  const order = {
+    id: "FS" + Date.now().toString().slice(-6),
+    date: new Date().toLocaleString("fr-FR"),
+    nom: (f.get("nom") || "").trim(), tel: (f.get("tel") || "").trim(),
+    box: box ? box.name : "Extras seuls",
+    picks: box ? cart.picks : {},
+    extras: extraLines().map(([k,e]) => ({k, size:e.size, qty:e.qty})),
+    offer: box ? offerItems(box).map(o => o.label).join(" + ") : null,
+    resume: buildResume(box, offered),
+    delivery: deliveryFee(), tip: tipAmount(),
+    total: grandTotal(), address: addr, slot: f.get("slot"),
+    payment: "À régler à la livraison (démo)"
+  };
+  const sent = await sendOrder(order);
+  const orders = load("fs_orders", []); orders.push(order); store("fs_orders", orders);
+  cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}}; store("fs_cart", cart);
+  draft = {};
+  order.sent = sent;
+  store("fs_orders", orders);
+  if (!sent) toast("Commande enregistrée. Pensez à nous confirmer par téléphone ou WhatsApp.");
+  location.hash = "commande/" + order.id;
+}
+
+/* ===== FICHE INGREDIENTS / ALLERGENES ===== */
+function openItem(name) {
+  const grade = gradeOf[name];
+  const allergens = ALLERGENES[name] || [];
+  const chips = allergens.length
+    ? allergens.map(a => `<span class="chip">${a}</span>`).join("")
+    : `<span class="chip none">Aucun allergène listé</span>`;
+  document.getElementById("modalCard").innerHTML = `
+    <button class="modal-close" onclick="closeItem()" aria-label="Fermer">×</button>
+    <span class="eyebrow">${grade} · ${typeLabel(typeOf(name, grade))}</span>
+    <h2>${name}</h2>
+    <h3>Ingrédients</h3>
+    <p>${ingredientsOf[name]}</p>
+    <h3>Allergènes</h3>
+    <div class="chips">${chips}</div>
+    <p class="allergen-note">Informations indicatives, à partir de la recette habituelle. Signalez toute allergie avant de commander : nous ne pouvons pas garantir l'absence de traces.</p>`;
+  document.getElementById("modal").classList.add("open");
+}
+function closeItem() { document.getElementById("modal").classList.remove("open"); }
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeItem(); });
+
+/* ===== PAGES ===== */
+function pageAccueil() {
+  return `
+  <section class="hero">
+    <div class="wrap">
+      <span class="hero-kicker">✿ Fait maison · Livré chez vous</span>
+      <h1 class="display">
+        <span class="line"><span class="word">Sushis</span></span>
+        <span class="line"><span class="word">faits</span> <span class="word">maison</span></span>
+        <span class="line"><span class="word" style="color:var(--gold)">livrés</span></span>
+      </h1>
+      <p class="hero-sub">Composez votre box comme vous l'aimez, ou prenez une box déjà faite.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#boxes">Choisir ma box <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#carte">Voir la carte</a>
+      </div>
+    </div>
+    <svg class="flower" viewBox="0 0 200 200" aria-hidden="true">
+      ${[0,72,144,216,288].map(a=>`<ellipse cx="100" cy="58" rx="36" ry="52" fill="${a%144===0?'#f1d4e0':'#7d0a2b'}" opacity=".9" transform="rotate(${a} 100 100)"/>`).join("")}
+      <circle cx="100" cy="100" r="22" fill="#c99a3b"/>
+    </svg>
+  </section>
+
+  <div class="band" aria-hidden="true"><div class="track">
+    ${Array(2).fill(`<span>Classique <em>✿</em> Signature <em>✿</em> Golden <em>✿</em> Créations uniques <em>✿</em></span>`).join("")}
+  </div></div>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Nos formats</span>
+      <h2 class="display section-title reveal">Composer ou déjà prête</h2>
+      <p class="note reveal" style="margin-top:12px">Les box à composer se remplissent à votre goût. Les box déjà faites se commandent telles quelles.</p>
+      ${boxCards()}
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <span class="eyebrow">La carte</span>
+      <h2 class="display section-title reveal">Trois grades, un seul plaisir</h2>
+      <div class="grades">
+        <div class="grade c reveal"><h3>Classique</h3><p>Les essentiels : saumon, thon, poulet, avocat, fromage.</p></div>
+        <div class="grade s reveal" style="transition-delay:120ms"><h3>Signature</h3><p>Nos créations maison : Aburi, Italia Fusion, Karaage, Tempura.</p></div>
+        <div class="grade g reveal" style="transition-delay:240ms"><h3>Golden</h3><p>Panés et frits, pour les gourmands. Supplément de ${GOLDEN_SUPPLEMENT} € par rouleau.</p></div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function boxCards() {
+  const composed = ["mini","uno","duo"].map((id,i) => composedCard(id,i)).join("");
+  const discovery = ["decouverte_mini","decouverte_uno","decouverte_duo"].map((id,i) => fixedCard(id,i,true)).join("");
+  const themed = ["full_poulet","full_fromage","full_frit"].map((id,i) => fixedCard(id,i,false)).join("");
+  return `<div class="boxes">${composed}</div>
+    <h3 class="sub-title reveal">Box découverte, déjà faites</h3>
+    <div class="boxes">${discovery}</div>
+    <h3 class="sub-title reveal">Mini box thématiques</h3>
+    <div class="boxes">${themed}</div>`;
+}
+function composedCard(id, i) {
+  const b = BOXES[id];
+  return `
+    <div class="box reveal" style="transition-delay:${i*90}ms">
+      <span class="num">${b.pieces}</span>
+      <h3>${b.name}</h3>
+      <p>${b.desc}</p>${baguetteTag(b)}
+      <p style="font-weight:600;margin-top:10px">Classique ${b.quota.Classique} · Signature ${b.quota.Signature} · Golden ${b.quota.Golden}</p>
+      <div class="price">${eur(b.price)}</div>
+      <div class="actions"><button class="btn sm" onclick="chooseBox('${id}')">Composer <span class="arrow">→</span></button></div>
+    </div>`;
+}
+function fixedCard(id, i, dark) {
+  const b = BOXES[id];
+  return `
+    <div class="box ${dark?"dark":""} reveal" style="transition-delay:${i*90}ms">
+      <span class="num">${b.pieces}</span>
+      <h3>${b.name}</h3>
+      <p>${b.desc}</p>${baguetteTag(b)}
+      <div class="price">${eur(b.price)}</div>
+      <div class="actions"><button class="btn ${dark?"gold":""} sm" onclick="chooseBox('${id}')">Commander <span class="arrow">→</span></button></div>
+    </div>`;
+}
+
+function pageBoxes() {
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Nos box</span>
+    <h1 class="display">Votre box, <span style="color:var(--gold)">votre choix</span></h1>
+    <p>Composez la vôtre dans les quotas de chaque grade, ou prenez une box déjà faite.</p>
+  </div></section>
+  <section style="padding-top:20px"><div class="wrap">
+    ${boxCards()}
+    <p class="note" style="margin-top:24px">Supplément de ${GOLDEN_SUPPLEMENT} € par rouleau Golden dans les box à composer. Livraison : ${eur(DELIVERY_FEE)}.</p>
+  </div></section>`;
+}
+
+function pageComposer() {
+  if (!cart.box) return `
+    <section class="page-head"><div class="wrap">
+      <span class="eyebrow">Composer</span>
+      <h1 class="display">Votre box</h1>
+      <div class="notice" style="margin-top:20px">Choisissez d'abord une box à composer.</div>
+      <a class="btn" href="#boxes" style="margin-top:20px">Voir les box <span class="arrow">→</span></a>
+    </div></section>`;
+  const b = BOXES[cart.box], c = counts();
+  if (b.fixed) return `<section class="page-head"><div class="wrap"><span class="eyebrow">Box déjà faite</span><h1 class="display">${b.name}</h1>
+    <p>Cette box est déjà composée, elle ne se modifie pas.</p>
+    <a class="btn" href="#panier" style="margin-top:20px">Voir mon panier <span class="arrow">→</span></a></div></section>`;
+  const pct = (c.total/b.pieces)*100;
+  const left = b.pieces - c.total;
+  const complete = isComplete();
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Composer</span>
+    <h1 class="display">${b.name}</h1>
+    <p>${b.pieces} pièces à répartir selon les quotas de chaque grade.${b.baguettes ? " 🥢 " + b.baguettes + " paire(s) de baguettes offerte(s)." : ""}${b.sauces ? " 🥫 " + b.sauces + " sauce(s) offerte(s)." : ""} Cliquez sur « i » pour voir ingrédients et allergènes.</p>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    ${GRADES.map(g => renderGrade(g)).join("")}
+    <div class="dock">
+      <div class="info">
+        <b>${complete ? "Box complète ✓" : `Plus que ${left} sushi${left>1?"s":""}`}</b>
+        <div class="track2"><span style="width:${pct}%"></span></div>
+      </div>
+      <div class="total">${eur(boxTotal())}</div>
+      <a class="btn" href="${complete?"#extras":"#composer"}" ${complete?"":'onclick="toast(\'Complétez votre box pour continuer.\');return false"'}>Continuer <span class="arrow">→</span></a>
+    </div>
+  </div></section>`;
+}
+
+function renderGrade(g) {
+  const b = BOXES[cart.box], c = counts();
+  return `
+  <div class="gtitle">
+    <h2>${g}</h2><span class="count">${c[g]} / ${b.quota[g]}</span>
+    ${g === "Golden" ? `<span class="sup">+${GOLDEN_SUPPLEMENT} € / rouleau</span>` : ""}
+  </div>
+  <div class="items">
+  ${MENU[g].map(([n,i]) => {
+    const q = cart.picks[n] || 0, n2 = jsStr(n);
+    return `<div class="item ${q?"picked":""}">
+      <div class="head"><div><span class="type">${typeLabel(typeOf(n,g))}</span><b style="display:block">${n}</b></div>
+        <button class="info-btn" onclick="openItem('${n2}')" aria-label="Ingrédients et allergènes">i</button></div>
+      <small>${i}</small>
+      <div class="qty">
+        <button onclick="changePick('${n2}',-1)" ${q?"":"disabled"} aria-label="Retirer">−</button>
+        <span class="n">${q}</span>
+        <button onclick="changePick('${n2}',1)" ${canAdd(n)?"":"disabled"} aria-label="Ajouter">+</button>
+      </div></div>`;
+  }).join("")}
+  </div>`;
+}
+
+function pageCarte(filter) {
+  const active = TYPES.some(t => t.id === filter) ? filter : "tous";
+  const entries = Object.entries(gradeOf).filter(([n,g]) => active === "tous" || typeOf(n,g) === active);
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Notre carte</span>
+    <h1 class="display">La carte</h1>
+    <p>Triez par type de sushi. Cliquez sur « i » pour voir ingrédients et allergènes.</p>
+    <div class="tabs">${TYPES.map(t => `<a href="#carte/${t.id}" class="${t.id===active?"on":""}">${t.label}</a>`).join("")}</div>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    <div class="items">
+    ${entries.map(([n,g]) => `
+      <div class="item">
+        <div class="head"><div><span class="type">${g} · ${typeLabel(typeOf(n,g))}</span><b style="display:block">${n}</b></div>
+          <button class="info-btn" onclick="openItem('${jsStr(n)}')" aria-label="Ingrédients et allergènes">i</button></div>
+        <small>${ingredientsOf[n]}</small>
+        <button class="link-btn" style="text-align:left;margin-top:8px" onclick="openItem('${jsStr(n)}')">Ingrédients et allergènes →</button>
+      </div>`).join("")}
+    </div>
+    ${entries.length ? "" : `<div class="notice" style="margin-top:20px">Aucun sushi dans cette catégorie pour le moment.</div>`}
+  </div></section>`;
+}
+
+function extraCard(key) {
+  const e = EXTRA_ITEMS[key];
+  const entry = cart.extras[key] || {};
+  const any = Object.values(entry).some(q => q > 0);
+  return `<div class="item ${any?"picked":""}">
+    <div class="head"><div><span class="type">${e.group}</span><b style="display:block">${e.name}</b></div></div>
+    <small>${e.desc}</small>
+    ${e.sizes.map(sz => {
+      const q = entry[sz.n] || 0;
+      return `<div class="size-row">
+        <span class="size-label">${sz.label || "×" + sz.n} <em>${eur(sz.price)}</em></span>
+        <div class="qty">
+          <button onclick="changeExtra('${key}','${sz.n}',-1)" ${q?"":"disabled"} aria-label="Retirer">−</button>
+          <span class="n">${q}</span>
+          <button onclick="changeExtra('${key}','${sz.n}',1)" aria-label="Ajouter">+</button>
+        </div></div>`;
+    }).join("")}
+  </div>`;
+}
+
+function pageExtras() {
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Extras</span>
+    <h1 class="display">Pour compléter</h1>
+    <p>Ajoutez-les à votre box, ou commandez-les seuls. Choisissez le format (×4, ×8 ou ×1, ×2) directement sur chaque produit.</p>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    <div class="gtitle"><h2>Friture</h2><span class="sup">Par 4 ou par 8</span></div>
+    <div class="items">${extraCard("karaage")}${extraCard("tempura")}${extraCard("rings")}</div>
+    <div class="gtitle"><h2>Mochis glacés</h2><span class="sup">5 parfums</span></div>
+    <div class="items">${FLAVORS.map(f => extraCard("mochi_" + f.toLowerCase())).join("")}</div>
+    <div class="gtitle"><h2>Autres</h2><span class="sup">Sauces et accessoires</span></div>
+    <div class="items">${extraCard("sauce")}${extraCard("baguettes")}</div>
+    <div style="margin-top:36px;text-align:right"><a class="btn" href="#panier">Voir mon panier <span class="arrow">→</span></a></div>
+  </div></section>`;
+}
+
+function tipBlock() {
+  const t = cart.tip || {on:false, amount:0};
+  return `<div class="tip">
+    <div class="tip-head">
+      <div><b>Laisser un pourboire</b><small>Pour l'équipe et nos livreurs</small></div>
+      <label class="switch"><input type="checkbox" ${t.on?"checked":""} onchange="toggleTip(this.checked)"><span class="knob"></span></label>
+    </div>
+    ${t.on ? `<div class="sizes" style="margin-top:14px">${[1,2,5].map(a => `<button class="size ${t.amount===a?"on":""}" onclick="setTip(${a})">${a} €</button>`).join("")}</div>
+      <label>Montant libre (€)</label>
+      <input type="number" min="0" step="0.5" inputmode="decimal" placeholder="Autre montant" value="${[1,2,5].includes(t.amount) || !t.amount ? "" : t.amount}" onchange="setCustomTip(this.value)">
+      <p class="tip-msg">Ce pourboire pourra aider à développer Floral Sushi et à améliorer votre expérience. Merci 🌸</p>` : ""}
+  </div>`;
+}
+
+function offerItems(b) {
+  const out = [];
+  if (b.baguettes) out.push({label:`${b.baguettes} paire${b.baguettes>1?"s":""} de baguettes à sushi offerte${b.baguettes>1?"s":""}`, note:`Incluse${b.baguettes>1?"s":""} avec votre ${b.name}`});
+  if (b.sauces) out.push({label:`${b.sauces} sauce${b.sauces>1?"s":""} offerte${b.sauces>1?"s":""} (sucrée ou salée)`, note:`Incluse${b.sauces>1?"s":""} avec votre ${b.name}`});
+  return out;
+}
+
+function pagePanier() {
+  const extrasLines = extraLines().map(([k,e]) =>
+    extraRow(k,e)).join("");
+  const extrasBlock = `<div class="panel reveal"><h2>Extras</h2>
+    ${extrasLines || `<p class="note">Aucun extra pour le moment.</p>`}
+    <div style="margin-top:12px"><a class="btn ghost sm" href="#extras">Ajouter des extras</a></div></div>`;
+
+  if (cart.box && !isComplete()) return `
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1>
+      <div class="notice" style="margin-top:20px">Votre box n'est pas encore complète.</div>
+      <a class="btn" href="#composer" style="margin-top:20px">Retourner composer <span class="arrow">→</span></a></div></section>`;
+
+  if (!canCheckout()) return `
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1>
+      <div class="notice" style="margin-top:20px">Votre panier est vide.</div>
+      <a class="btn" href="#boxes" style="margin-top:20px">Choisir une box <span class="arrow">→</span></a></div></section>
+    <section style="padding-top:10px"><div class="wrap" style="max-width:760px">${extrasBlock}</div></section>`;
+
+  const b = cart.box ? BOXES[cart.box] : null;
+  const boxLines = b ? Object.entries(cart.picks).map(([n,q]) =>
+    `<div class="row"><span>${q} × ${n}</span><span>${gradeOf[n]==="Golden"?"+"+eur(GOLDEN_SUPPLEMENT*q):""}</span></div>`).join("") : "";
+  const boxBlock = b ? `<div class="panel reveal">
+    <h2>${b.name} ${cart.mode==="fixed"?'<span class="tag-pre">déjà faite</span>':""}</h2>
+    <button class="trash-btn" onclick="clearBox()">🗑 Retirer la box</button>
+    ${boxLines}
+    <div class="row"><b>Box</b><b>${eur(boxTotal())}</b></div>
+  </div>` : "";
+
+  const addr = {...(profile || {}), ...draft};
+  const slots = [];
+  for (let d = 0; d < 7; d++) {
+    const day = new Date(); day.setDate(day.getDate() + d);
+    const label = day.toLocaleDateString("fr-FR", {weekday:"long", day:"numeric", month:"long"});
+    ["18:00","19:00","20:00","21:00"].forEach(h => slots.push(`<option value="${label} ${h}">${label} à ${h}</option>`));
+  }
+  const card = profile && profile.card
+    ? `<div class="notice" style="background:var(--ink);color:#fff">💳 ${profile.card.brand} ····${profile.card.last4} · enregistrée dans votre profil</div>`
+    : `<div class="notice">Aucun moyen de paiement enregistré. <a href="#profil">Ajouter dans Mon profil</a></div>`;
+
+  const offerRow = b ? offerItems(b).map(o => `<div class="row offer"><span>${o.label}<small>${o.note}</small></span><span>0,00 €</span></div>`).join("") : "";
+
+  return `
+  <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Presque prêt</h1></div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    <div class="two-col">
+      <div>
+        ${boxBlock}
+        ${extrasBlock}
+        <form class="panel reveal" onsubmit="placeOrder(event)" oninput="saveDraft(this)">
+          <h2>Vos coordonnées</h2>
+          <div class="two">
+            <div><label>Nom</label><input name="nom" required value="${esc(addr.nom)}"></div>
+            <div><label>Téléphone</label><input name="tel" type="tel" inputmode="tel" required placeholder="06 00 00 00 00" value="${esc(addr.tel)}"></div>
+          </div>
+          <h2 style="margin-top:26px">Livraison</h2>
+          <div class="two">
+            <div><label>Rue</label><input name="rue" required value="${esc(addr.rue)}"></div>
+            <div><label>Numéro / bâtiment</label><input name="numero" required value="${esc(addr.numero)}"></div>
+          </div>
+          <label>Complément (appartement, étage, digicode)</label><input name="complement" value="${esc(addr.complement)}">
+          <div class="two">
+            <div><label>Code postal</label><input name="cp" required value="${esc(addr.cp)}"></div>
+            <div><label>Ville</label><input name="ville" required list="villes" value="${esc(addr.ville)}">
+              <datalist id="villes">${ZONE_VILLES.map(v=>`<option value="${v}">`).join("")}</datalist></div>
+          </div>
+          <label>Créneau de livraison</label>
+          <select name="slot" required><option value="">Choisir…</option>${slots.join("")}</select>
+          ${b && b.sauces ? `<div class="two"><div><label>Sauces sucrées offertes</label><input type="number" name="sauce_sucree" min="0" max="${b.sauces}" value="${esc(draft.sauce_sucree || "0")}"></div><div><label>Sauces salées offertes</label><input type="number" name="sauce_salee" min="0" max="${b.sauces}" value="${esc(draft.sauce_salee || "0")}"></div></div><p class="note">${b.sauces} sauce(s) offerte(s) avec cette box.</p>` : ""}
+          <h2 style="margin-top:26px">Paiement</h2>
+          ${card}
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap">
+            <p class="note" style="max-width:320px">Mode démonstration : aucun paiement réel n'est effectué.</p>
+            <button class="btn" type="submit">Valider ma commande <span class="arrow">→</span></button>
+          </div>
+        </form>
+      </div>
+      <aside class="panel summary reveal">
+        <h2>Récap</h2>
+        ${b ? `<div class="row"><span>${b.name}</span><span>${eur(boxTotal())}</span></div>` : ""}
+        ${extrasLines ? extraLines().map(([k,e]) => extraRow(k,e)).join("") : ""}
+        ${offerRow}
+        <div class="row fee"><span>Livraison</span><span>${eur(deliveryFee())}</span></div>
+        ${tipBlock()}
+        ${tipAmount() > 0 ? `<div class="row"><span>Pourboire</span><span>${eur(tipAmount())}</span></div>` : ""}
+        <div class="total-big">${eur(grandTotal())}</div>
+        <p class="note">Livraison autour d'Amiens.</p>
+        <button class="trash-btn" onclick="clearCart()">🗑 Vider mon panier</button>
+      </aside>
+    </div>
+  </div></section>`;
+}
+
+function pageProfil() {
+  if (!session) return authView();
+  const p = profile || {};
+  return `
+  <section class="page-head"><div class="wrap">
+    <span class="eyebrow">Mon profil</span>
+    <h1 class="display">Vos infos</h1>
+    <p>Connecté : <b>${session}</b> · <button class="link-btn" onclick="logout()">Se déconnecter</button></p>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap" style="max-width:760px">
+    <form class="panel reveal" onsubmit="saveProfile(event)">
+      <h2>Mes informations</h2>
+      <div class="two">
+        <div><label>Nom</label><input name="nom" value="${esc(p.nom)}"></div>
+        <div><label>Téléphone</label><input name="tel" value="${esc(p.tel)}"></div>
+      </div>
+      <div class="two">
+        <div><label>Rue</label><input name="rue" value="${esc(p.rue)}"></div>
+        <div><label>Numéro / bâtiment</label><input name="numero" value="${esc(p.numero)}"></div>
+      </div>
+      <label>Complément</label><input name="complement" value="${esc(p.complement)}">
+      <div class="two">
+        <div><label>Code postal</label><input name="cp" value="${esc(p.cp)}"></div>
+        <div><label>Ville</label><input name="ville" list="villes" value="${esc(p.ville)}"></div>
+      </div>
+      <h2 style="margin-top:28px">Moyen de paiement</h2>
+      ${p.card ? `<div class="row"><span>💳 ${p.card.brand} ····${p.card.last4}</span>
+        <button class="btn ghost sm" type="button" onclick="clearCard()">Supprimer</button></div>` : ""}
+      <div class="two">
+        <div><label>Type de carte</label><input name="brand" placeholder="Visa, Mastercard…"></div>
+        <div><label>4 derniers chiffres</label><input name="last4" maxlength="4" inputmode="numeric" placeholder="1234"></div>
+      </div>
+      <p class="note" style="margin-top:12px">Pour votre sécurité, le numéro complet de carte n'est jamais stocké sur ce site. Le paiement réel sera géré par un prestataire sécurisé.</p>
+      <div style="text-align:right;margin-top:20px"><button class="btn" type="submit">Enregistrer <span class="arrow">→</span></button></div>
+    </form>
+  </div></section>`;
+}
+
+function pageCommande(id) {
+  const o = load("fs_orders", []).find(x => x.id === id);
+  if (!o) return `<section class="page-head"><div class="wrap"><h1 class="display">Commande introuvable</h1>
+    <a class="btn" href="#accueil" style="margin-top:20px">Accueil</a></div></section>`;
+  return `
+  <section class="page-head"><div class="wrap" style="text-align:center">
+    <span class="ok-badge">✓</span>
+    <h1 class="display" style="margin-top:20px">Merci !</h1>
+    <p style="margin:auto">Commande <b>${o.id}</b> enregistrée. Livraison : ${o.slot}.</p>
+  </div></section>
+  <section style="padding-top:10px"><div class="wrap" style="max-width:640px">
+    <div class="panel reveal">
+      <h2>${o.box}</h2>
+      ${Object.entries(o.picks).map(([n,q]) => `<div class="row"><span>${q} × ${n}</span></div>`).join("")}
+      ${(o.extras||[]).map(x => `<div class="row"><span>${x.qty} × ${EXTRA_ITEMS[x.k].name} (${sizeLabel(x.k,x.size)})</span></div>`).join("")}
+      ${o.offer ? `<div class="row offer"><span>${o.offer}</span></div>` : ""}
+      <div class="row fee"><span>Livraison</span><span>${eur(o.delivery||0)}</span></div>
+      ${o.tip ? `<div class="row fee"><span>Pourboire</span><span>${eur(o.tip)}</span></div>` : ""}
+      <div class="total-big">${eur(o.total)}</div>
+      ${o.saucesPref ? `<p class="note">Sauces offertes : ${o.saucesPref}</p>` : ""}
+      <p class="note">${o.nom || ""} · ${o.tel || ""}</p>
+      ${SHOP_PHONE ? `<a class="btn" href="https://wa.me/${SHOP_PHONE}?text=${encodeURIComponent(orderText(o))}" target="_blank" rel="noopener" style="margin-top:14px">Confirmer par WhatsApp <span class="arrow">→</span></a>` : ""}
+      <p class="note">${o.address.numero} ${o.address.rue}${o.address.complement ? ", " + o.address.complement : ""}, ${o.address.cp} ${o.address.ville}<br>Paiement : ${o.payment}</p>
+    </div>
+  </div></section>`;
+}
+
+/* Pages d'information */
+function pageInfos(k) {
+  const wrap = (title, body) => `
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Floral Sushi</span><h1 class="display">${title}</h1></div></section>
+    <section style="padding-top:10px"><div class="wrap" style="max-width:820px"><div class="panel reveal">${body}</div></div></section>`;
+
+  if (k === "mentions") return wrap("Mentions légales", `
+    <h3>Éditeur du site</h3>
+    <p>Floral Sushi, activité de préparation et livraison de sushis.<br>
+    Responsable de publication : <span class="placeholder">[nom du responsable]</span><br>
+    Statut juridique et numéro SIRET : <span class="placeholder">[à compléter]</span><br>
+    Adresse : <span class="placeholder">[adresse à compléter]</span><br>
+    Contact : <span class="placeholder">[email et téléphone à compléter]</span></p>
+    <h3>Hébergement</h3>
+    <p>Le site est hébergé par WordPress.com (Automattic Inc.).</p>
+    <h3>Propriété intellectuelle</h3>
+    <p>Les textes, photographies, logos et éléments graphiques du site sont protégés. Toute reproduction sans autorisation écrite est interdite.</p>
+    <h3>Données personnelles</h3>
+    <p>Les informations saisies (nom, adresse, téléphone, email) servent uniquement à préparer et livrer vos commandes. Elles ne sont pas revendues. Les commandes sont stockées dans un tableur accessible uniquement par la boutique. Vous pouvez demander l'accès, la rectification ou la suppression de vos données en nous contactant. Les données de profil sont enregistrées dans votre navigateur.</p>
+    <h3>Cookies et stockage</h3>
+    <p>Le site n'utilise pas de cookies publicitaires. Il enregistre dans votre navigateur votre panier et votre profil, pour votre confort.</p>
+    <h3>Allergènes</h3>
+    <p>Les informations sur les allergènes sont données à titre indicatif, à partir des recettes habituelles. Signalez toute allergie avant de commander.</p>`);
+
+  if (k === "faq") return wrap("FAQ", `
+    <h3>Où livrez-vous ?</h3>
+    <p>Autour d'Amiens : Amiens, Camon, Longueau, Salouël, Dury, Glisy, Rivery, Saleux et Boves. La liste peut évoluer.</p>
+    <h3>Quels sont les créneaux de livraison ?</h3>
+    <p>Nous livrons de 18 h à 21 h, sur les 7 prochains jours, avec un créneau d'une heure.</p>
+    <h3>Combien coûte la livraison ?</h3>
+    <p>${eur(DELIVERY_FEE)} par commande, ajoutés au récapitulatif du panier.</p>
+    <h3>Comment fonctionne l'offre de baguettes ?</h3>
+    <p>Les box Uno et Duo (à composer ou découverte) et la Mini Full Frit offrent des baguettes et des sauces : 1 paire de baguettes et 1 sauce pour l'Uno et la Full Frit, 2 paires et 2 sauces pour la Duo. Les mini box n'ont pas d'offre. Les sauces, sucrées ou salées, se précisent à la commande. Des baguettes supplémentaires coûtent 0,50 € la paire, et des sauces supplémentaires 0,20 € l'unité, dans la rubrique Autres.</p>
+    <h3>Puis-je laisser un pourboire ?</h3>
+    <p>Oui, depuis le panier : activez l'option puis choisissez 1 €, 2 € ou 5 €. Le montant s'ajoute au total de la commande.</p>
+    <h3>Puis-je modifier une box composée ?</h3>
+    <p>Oui, dans la limite des quotas de la box, tant que vous n'avez pas validé la commande. Les box déjà faites ne se modifient pas.</p>
+    <h3>Comment savoir si un sushi contient un allergène ?</h3>
+    <p>Cliquez sur le « i » d'un sushi, dans la carte ou dans le composeur. Vous y verrez les ingrédients et les allergènes. Signalez toute allergie avant de commander : nous ne pouvons pas garantir l'absence de traces.</p>
+    <h3>Les sushis sont-ils faits maison ?</h3>
+    <p>Oui, ils sont préparés chaque jour.</p>
+    <h3>Comment fonctionne le supplément Golden ?</h3>
+    <p>Dans une box à composer, chaque rouleau Golden ajoute ${GOLDEN_SUPPLEMENT} €. Les mini box thématiques ont un prix fixe qui inclut ce supplément.</p>
+    <h3>Quels moyens de paiement ?</h3>
+    <p>Le paiement en ligne sera disponible au lancement. Votre carte peut être enregistrée dans votre profil, sans que le numéro complet ne soit stocké sur le site.</p>
+    <h3>Puis-je annuler ma commande ?</h3>
+    <p>Contactez-nous le plus tôt possible. Une commande déjà préparée ne peut pas être annulée.</p>`);
+
+  if (k === "contact") return `
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Contact</span><h1 class="display">Écrivez-nous</h1>
+      <p>Une question, une allergie, un souci de livraison ? Nous répondons vite.</p></div></section>
+    <section style="padding-top:10px"><div class="wrap" style="max-width:760px">
+      <div class="contact-list reveal">
+        <a class="contact-line" href="tel:+330000000000">
+          <span class="ico">📞</span><div><b>Téléphone</b><small><span class="placeholder">+33 X XX XX XX XX (à remplacer)</span></small></div>
+        </a>
+        <a class="contact-line" href="mailto:contact@votre-domaine.fr">
+          <span class="ico">✉️</span><div><b>Email</b><small><span class="placeholder">contact@votre-domaine.fr (à remplacer)</span></small></div>
+        </a>
+        <a class="contact-line" href="https://www.facebook.com/" target="_blank" rel="noopener">
+          <span class="ico">f</span><div><b>Facebook</b><small><span class="placeholder">lien de la page à renseigner</span></small></div>
+        </a>
+        <a class="contact-line" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <span class="ico">◎</span><div><b>Instagram</b><small><span class="placeholder">lien du compte à renseigner</span></small></div>
+        </a>
+      </div>
+      <p class="note" style="margin-top:20px">Zone de livraison : autour d'Amiens. Créneaux de livraison de 18 h à 21 h, 7 jours sur 7.</p>
+    </div></section>`;
+}
+
+/* ===== ROUTEUR & ANIMATIONS ===== */
+function observeReveals() {
+  const els = document.querySelectorAll(".reveal:not(.in)");
+  if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  }), {threshold:.15});
+  els.forEach(e => io.observe(e));
+}
+function buildPetals() {
+  const host = document.getElementById("petals");
+  const colors = ["#f1d4e0","#f9e6ee","#e7b3c9","#fff"];
+  host.innerHTML = Array.from({length:16}, () => {
+    const s = 10 + Math.random()*14, left = Math.random()*100, dur = 14 + Math.random()*16, delay = -Math.random()*20;
+    const c = colors[Math.floor(Math.random()*colors.length)];
+    return `<span class="petal" style="left:${left}%;width:${s}px;height:${s*.8}px;animation-duration:${dur}s;animation-delay:${delay}s;background:radial-gradient(circle at 30% 30%,#fff,${c} 55%,#e09ab8)"></span>`;
+  }).join("");
+}
+let lastRoute = null;
+function render() {
+  const h = location.hash.replace("#","") || "accueil";
+  const keepScroll = h === lastRoute;
+  const scrollY = window.scrollY;
+  lastRoute = h;
+  const [page, arg] = h.split("/");
+  const views = {accueil:pageAccueil, boxes:pageBoxes, composer:pageComposer, extras:pageExtras, panier:pagePanier, profil:pageProfil};
+  let html;
+  if (page === "commande") html = pageCommande(arg);
+  else if (page === "carte") html = pageCarte(arg);
+  else if (["mentions","faq","contact"].includes(page)) html = pageInfos(page);
+  else html = (views[page] || pageAccueil)();
+  document.getElementById("view").innerHTML = html;
+  document.querySelectorAll("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === page));
+  const n = cartCount();
+  let dot = document.querySelector('[data-nav="panier"] .dot');
+  if (n) {
+    if (!dot) { dot = document.createElement("span"); dot.className = "dot"; document.querySelector('[data-nav="panier"]').appendChild(dot); }
+    dot.textContent = n;
+  } else if (dot) dot.remove();
+  if (keepScroll) document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+  observeReveals();
+  document.title = (page === "accueil" ? "" : (document.querySelector("h1")?.textContent || "") + " · ") + "Floral Sushi";
+  window.scrollTo({top: keepScroll ? scrollY : 0, behavior:"instant"});
+}
+window.addEventListener("hashchange", render);
+buildPetals();
+render();
+</script>
+</body>
+</html>
