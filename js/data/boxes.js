@@ -35,7 +35,7 @@ export const PRESETS = {
   decouverte_uno: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,1])),
   decouverte_duo: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,2])),
   full_poulet:  {"California Poulet Fromage":3,"California Chicken":3,"California Avocado Poulet Karaage":2},
-  full_fromage: {"California Saumon Fromage":2,"California Smoky":2,"Californian Thon Boursin":2,"Maki Saumon Avocat Fromage Poivron chèvre":2},
+  full_fromage: {"California Saumon Fromage":2,"California Smoky":2,"Californian Thon Boursin":2,"Maki Saumon":2},
   full_frit:    {"Golden Poulet Cheddar":3,"Golden Atlantic Spicy":3,"Golden Campagnard":2}
 };
 

@@ -1,12 +1,13 @@
 import { GOLDEN_SUPPLEMENT } from "../../config.js";
 import { changePick } from "../../controllers/cart.js";
 import { BOXES } from "../../data/boxes.js";
-import { GRADES, MENU, typeLabel, typeOf } from "../../data/menu.js";
+import { GRADES, MENU, matchesProtein, typeLabel, typeOf } from "../../data/menu.js";
 import { boxTotal, canAdd, counts, isComplete } from "../../domain/cart.js";
 import { state } from "../../state/state.js";
 import { eur, jsStr } from "../../utils/format.js";
 import { openItem } from "../components/modal.js";
 import { toast } from "../components/toast.js";
+import { proteinChips } from "../components/filters.js";
 
 export function pageComposer() {
   if (!state.cart.box) return `
@@ -30,6 +31,7 @@ export function pageComposer() {
     <p>${b.pieces} pièces à répartir selon les quotas de chaque grade.${b.baguettes ? " 🥢 " + b.baguettes + " paire(s) de baguettes offerte(s)." : ""}${b.sauces ? " 🥫 " + b.sauces + " sauce(s) offerte(s)." : ""} Cliquez sur « i » pour voir ingrédients et allergènes.</p>
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
+    ${proteinChips()}
     ${GRADES.map(g => renderGrade(g)).join("")}
     <div class="dock">
       <div class="info">
@@ -50,7 +52,7 @@ export function renderGrade(g) {
     ${g === "Golden" ? `<span class="sup">+${GOLDEN_SUPPLEMENT} € / rouleau</span>` : ""}
   </div>
   <div class="items">
-  ${MENU[g].map(([n,i]) => {
+  ${MENU[g].filter(([n]) => matchesProtein(n, state.protein)).map(([n,i]) => {
     const q = state.cart.picks[n] || 0, n2 = jsStr(n);
     return `<div class="item ${q?"picked":""}">
       <div class="head"><div><span class="type">${typeLabel(typeOf(n,g))}</span><b style="display:block">${n}</b></div>
@@ -62,5 +64,5 @@ export function renderGrade(g) {
         <button onclick="changePick('${n2}',1)" ${canAdd(n)?"":"disabled"} aria-label="Ajouter">+</button>
       </div></div>`;
   }).join("")}
-  </div>`;
+  </div>${MENU[g].some(([n]) => matchesProtein(n, state.protein)) ? "" : `<div class="notice">Aucun sushi ${g.toLowerCase()} avec ce filtre.</div>`}`;
 }

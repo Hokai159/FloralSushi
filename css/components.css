@@ -125,3 +125,10 @@ footer a{color:var(--rose);text-decoration:none;font-weight:600}
 footer a:hover{color:#fff;text-decoration:underline}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.petals{display:none}}
+
+/* Filtre par protéine et photo de sushi */
+.tabs button{padding:10px 18px;border-radius:999px;font:inherit;font-weight:700;color:var(--bordeaux);background:var(--glass);border:2px solid transparent;cursor:pointer;transition:all .3s var(--ease)}
+.tabs button:hover{border-color:var(--bordeaux)}
+.tabs button.on{background:var(--bordeaux);color:#fff}
+.protein-filter{margin-top:14px}
+.item-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;margin:6px 0 14px}

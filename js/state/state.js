@@ -7,6 +7,7 @@ export const state = {
   session: load("fs_session", null),
   profile: null,
   draft: {},
+  protein: "tous",
 };
 state.cart.extras ||= {};
 state.cart.tip ||= {on:false, amount:0};

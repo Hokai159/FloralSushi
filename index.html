@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/home.css">
 <link rel="stylesheet" href="css/components.css">
+<link rel="icon" href="https://floralsushi.wordpress.com/wp-content/uploads/2025/05/bbafc540-c0f9-46c4-9db6-8e2820fef0d0-1.jpg">
 </head>
 <body>
 
@@ -25,19 +26,28 @@
 </div>
 
 <header>
-  <a class="logo" href="#accueil">
-    <img src="https://floralsushi.wordpress.com/wp-content/uploads/2025/05/bbafc540-c0f9-46c4-9db6-8e2820fef0d0-1.jpg" alt="Floral Sushi" onerror="this.remove()">
-    Floral Sushi
-  </a>
-  <nav>
-    <a href="#accueil" data-nav="accueil">Accueil</a>
-    <a href="#boxes" data-nav="boxes">Nos box</a>
-    <a href="#composer" data-nav="composer">Composer</a>
-    <a href="#carte" data-nav="carte">Carte</a>
-    <a href="#extras" data-nav="extras">Extras</a>
-    <a href="#panier" data-nav="panier">Panier</a>
-    <a href="#profil" data-nav="profil">Mon profil</a>
-  </nav>
+  <div class="hdr-left">
+    <a class="logo" href="#accueil" aria-label="Accueil">
+      <img src="https://floralsushi.wordpress.com/wp-content/uploads/2025/05/bbafc540-c0f9-46c4-9db6-8e2820fef0d0-1.jpg" alt="Floral Sushi" onerror="this.remove()">
+    </a>
+    <a class="hdr-link" href="#carte" data-nav="carte">Carte</a>
+  </div>
+  <a class="hdr-center" href="#accueil" data-nav="accueil">Accueil</a>
+  <div class="hdr-right">
+    <a class="hdr-link cart-link" href="#panier" data-nav="panier">Panier</a>
+    <a class="hdr-link" href="#profil" data-nav="profil">Profil</a>
+    <details class="menu-dd">
+      <summary>Menu ▾</summary>
+      <div class="menu-list">
+        <a href="#extras" data-nav="extras">Extras</a>
+        <a href="#composer" data-nav="composer">Composer</a>
+        <a href="#boxes" data-nav="boxes">Nos box</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+        <a href="#mentions" data-nav="mentions">Mentions légales</a>
+        <a href="#faq" data-nav="faq">FAQ</a>
+      </div>
+    </details>
+  </div>
 </header>
 
 <main id="view"></main>

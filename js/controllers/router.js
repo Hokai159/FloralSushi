@@ -35,5 +35,6 @@ export function render() {
   if (keepScroll) document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
   observeReveals();
   document.title = (page === "accueil" ? "" : (document.querySelector("h1")?.textContent || "") + " · ") + "Floral Sushi";
+  document.querySelectorAll("details.menu-dd").forEach(d => d.open = false);
   window.scrollTo({top: keepScroll ? scrollY : 0, behavior:"instant"});
 }

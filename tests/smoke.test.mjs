@@ -14,11 +14,11 @@ const orders = await import(J+"services/orders.js");
 const { pageAccueil } = await import(J+"views/pages/home.js");
 const { pageBoxes } = await import(J+"views/pages/boxes.js");
 const { pageComposer } = await import(J+"views/pages/composer.js");
-const { pageCarte } = await import(J+"views/pages/carte.js");
 const { pageExtras } = await import(J+"views/pages/extras.js");
 const { pagePanier } = await import(J+"views/pages/panier.js");
 const { pageProfil } = await import(J+"views/pages/profil.js");
 const { pageInfos } = await import(J+"views/pages/info.js");
+const { pageCarte } = await import(J+"views/pages/carte.js");
 
 let fails = 0;
 const check = (label, cond) => { console.log((cond ? "OK   " : "FAIL ") + label); if (!cond) fails++; };
@@ -62,6 +62,18 @@ check("extras : rubrique Autres", extras.includes("Autres"));
 check("panier : récapitulatif et total", panier.includes("total-big"));
 check("profil sans compte : création de compte", profil.includes("Nouveau compte"));
 check("FAQ : règle des baguettes", faq.includes("baguettes"));
+
+// 6. Makis et filtre par protéine : les rubriques restent visibles
+const { MENU } = await import(J+"data/menu.js");
+const { setProtein } = await import(J+"controllers/filters.js");
+const makis = MENU.Classique.map(([n]) => n).filter(n => n.startsWith("Maki"));
+check("4 makis distincts (saumon, avocat, fromage, poivron chèvre)", makis.length === 4);
+state.protein = "poulet";
+const cartePoulet = pageCarte("tous");
+check("filtre poulet : la rubrique Maki reste affichée", cartePoulet.includes(">Maki<"));
+check("filtre poulet : la rubrique California reste affichée", cartePoulet.includes(">California roll<"));
+check("filtre poulet : un maki vide affiche un message", cartePoulet.includes("Aucun maki au poulet"));
+state.protein = "tous";
 
 console.log(fails ? `\n${fails} échec(s)` : "\nTous les tests passent.");
 process.exitCode = fails ? 1 : 0;

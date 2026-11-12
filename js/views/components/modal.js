@@ -1,4 +1,5 @@
 import { ALLERGENES, gradeOf, ingredientsOf, typeLabel, typeOf } from "../../data/menu.js";
+import { IMAGES } from "../../data/images.js";
 
 export function openItem(name) {
   const grade = gradeOf[name];
@@ -10,6 +11,7 @@ export function openItem(name) {
     <button class="modal-close" onclick="closeItem()" aria-label="Fermer">×</button>
     <span class="eyebrow">${grade} · ${typeLabel(typeOf(name, grade))}</span>
     <h2>${name}</h2>
+    ${IMAGES[name] ? `<img class="item-photo" src="${IMAGES[name]}" alt="${name}">` : ""}
     <h3>Ingrédients</h3>
     <p>${ingredientsOf[name]}</p>
     <h3>Allergènes</h3>

@@ -7,7 +7,10 @@ export const MENU = {
     ["California Thon Avocat","Thon, avocat"],
     ["Californian Thon Boursin","Thon, boursin"],
     ["California Poulet Fromage","Poulet, fromage"],
-    ["Maki Saumon Avocat Fromage Poivron chèvre","Saumon, avocat, fromage, poivron, chèvre"]
+    ["Maki Saumon","Saumon"],
+    ["Maki Avocat","Avocat"],
+    ["Maki Fromage","Fromage"],
+    ["Maki Poivron chèvre","Poivron, chèvre"]
   ],
   Signature: [
     ["California Chicken","Poulet, carotte, oignon, cheese, salade, oignons frits, sauce algérienne"],
@@ -40,7 +43,10 @@ export const ALLERGENES = {
   "California Thon Avocat": A("Poisson"),
   "Californian Thon Boursin": A("Poisson","Lait"),
   "California Poulet Fromage": A("Lait"),
-  "Maki Saumon Avocat Fromage Poivron chèvre": A("Poisson","Lait"),
+  "Maki Saumon": A("Poisson"),
+  "Maki Avocat": A(),
+  "Maki Fromage": A("Lait"),
+  "Maki Poivron chèvre": A("Lait"),
   "California Chicken": A("Œufs","Moutarde","Lait"),
   "California Avocado Saumon": A("Poisson","Lait"),
   "California Salmon Spicy": A("Poisson","Lait","Œufs"),
@@ -82,3 +88,27 @@ export const ingredientsOf = {};
 for (const g in MENU) MENU[g].forEach(([n,i]) => ingredientsOf[n] = i);
 
 /* ===== ETAT ===== */
+
+// Filtre par protéine principale (un sushi peut être sans protéine listée)
+export const PROTEINS = [
+  {id:"tous", label:"Tous"},
+  {id:"poulet", label:"Poulet"},
+  {id:"saumon", label:"Saumon"},
+  {id:"thon", label:"Thon"},
+];
+export const PROTEIN_OF = {
+  "California Saumon Fromage": ["saumon"], "California Saumon Avocat": ["saumon"],
+  "California Smoky": ["saumon"], "California Vegetable": [],
+  "California Thon Avocat": ["thon"], "Californian Thon Boursin": ["thon"],
+  "California Poulet Fromage": ["poulet"],
+  "Maki Saumon": ["saumon"], "Maki Avocat": [], "Maki Fromage": [], "Maki Poivron chèvre": [],
+  "California Chicken": ["poulet"], "California Avocado Saumon": ["saumon"],
+  "California Salmon Spicy": ["saumon"], "California Mimosa": ["thon"],
+  "California Tempura": [], "California Avocado Poulet Karaage": ["poulet"],
+  "California Aburi Roll": ["saumon"], "California Italia Fusion": [],
+  "Golden Poulet Cheddar": ["poulet"], "Golden Atlantic Spicy": ["saumon"],
+  "Golden Campagnard": ["poulet"],
+};
+export function matchesProtein(name, protein) {
+  return protein === "tous" || (PROTEIN_OF[name] || []).includes(protein);
+}
