@@ -1,4 +1,3 @@
-import { GOLDEN_SUPPLEMENT } from "../../config.js";
 import { changePick } from "../../controllers/cart.js";
 import { BOXES } from "../../data/boxes.js";
 import { GRADES, MENU, matchesProtein, typeLabel, typeOf } from "../../data/menu.js";
@@ -49,7 +48,6 @@ export function renderGrade(g) {
   return `
   <div class="gtitle">
     <h2>${g}</h2><span class="count">${c[g]} / ${b.quota[g]}</span>
-    ${g === "Golden" ? `<span class="sup">+${GOLDEN_SUPPLEMENT} € / rouleau</span>` : ""}
   </div>
   <div class="items">
   ${MENU[g].filter(([n]) => matchesProtein(n, state.protein)).map(([n,i]) => {
@@ -57,7 +55,6 @@ export function renderGrade(g) {
     return `<div class="item ${q?"picked":""}">
       <div class="head"><div><span class="type">${typeLabel(typeOf(n,g))}</span><b style="display:block">${n}</b></div>
         <button class="info-btn" onclick="openItem('${n2}')" aria-label="Ingrédients et allergènes">i</button></div>
-      <small>${i}</small>
       <div class="qty">
         <button onclick="changePick('${n2}',-1)" ${q?"":"disabled"} aria-label="Retirer">−</button>
         <span class="n">${q}</span>

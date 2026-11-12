@@ -10,7 +10,7 @@ export function pageExtras() {
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
     <div class="gtitle"><h2>Friture</h2><span class="sup">Par 4 ou par 8</span></div>
-    <div class="items">${extraCard("karaage")}${extraCard("tempura")}${extraCard("rings")}</div>
+    <div class="items">${extraCard("karaage")}${extraCard("tempura")}${extraCard("rings")}${extraCard("rouleau")}</div>
     <div class="gtitle"><h2>Mochis glacés</h2><span class="sup">5 parfums</span></div>
     <div class="items">${FLAVORS.map(f => extraCard("mochi_" + f.toLowerCase())).join("")}</div>
     <div class="gtitle"><h2>Autres</h2><span class="sup">Sauces et accessoires</span></div>

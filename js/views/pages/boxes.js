@@ -1,4 +1,4 @@
-import { DELIVERY_FEE, GOLDEN_SUPPLEMENT } from "../../config.js";
+import { DELIVERY_FEE } from "../../config.js";
 import { eur } from "../../utils/format.js";
 import { boxCards } from "../components/cards.js";
 
@@ -11,6 +11,6 @@ export function pageBoxes() {
   </div></section>
   <section style="padding-top:20px"><div class="wrap">
     ${boxCards()}
-    <p class="note" style="margin-top:24px">Supplément de ${GOLDEN_SUPPLEMENT} € par rouleau Golden dans les box à composer. Livraison : ${eur(DELIVERY_FEE)}.</p>
+    <p class="note" style="margin-top:24px">Livraison : ${eur(DELIVERY_FEE)}.</p>
   </div></section>`;
 }

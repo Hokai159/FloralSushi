@@ -1,4 +1,4 @@
-import { TYPES, gradeOf, ingredientsOf, matchesProtein, typeOf } from "../../data/menu.js";
+import { TYPES, gradeOf, matchesProtein, typeOf } from "../../data/menu.js";
 import { proteinChips } from "../components/filters.js";
 import { state } from "../../state/state.js";
 import { jsStr } from "../../utils/format.js";
@@ -25,7 +25,6 @@ export function pageCarte() {
         <div class="item">
           <div class="head"><div><span class="type">${g}</span><b style="display:block">${n}</b></div>
             <button class="info-btn" onclick="openItem('${jsStr(n)}')" aria-label="Ingrédients et allergènes">i</button></div>
-          <small>${ingredientsOf[n]}</small>
           <button class="link-btn" style="text-align:left;margin-top:8px" onclick="openItem('${jsStr(n)}')">Ingrédients et allergènes →</button>
         </div>`).join("")}</div>`
         : `<div class="notice">Aucun ${t.label.toLowerCase()}${protein !== "tous" ? " au " + protein : ""} pour le moment.</div>`}`;

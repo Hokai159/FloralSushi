@@ -1,4 +1,4 @@
-import { DELIVERY_FEE, GOLDEN_SUPPLEMENT } from "../../config.js";
+import { DELIVERY_FEE } from "../../config.js";
 import { eur } from "../../utils/format.js";
 
 export function pageInfos(k) {
@@ -42,7 +42,7 @@ export function pageInfos(k) {
     <h3>Les sushis sont-ils faits maison ?</h3>
     <p>Oui, ils sont préparés chaque jour.</p>
     <h3>Comment fonctionne le supplément Golden ?</h3>
-    <p>Dans une box à composer, chaque rouleau Golden ajoute ${GOLDEN_SUPPLEMENT} €. Les mini box thématiques ont un prix fixe qui inclut ce supplément.</p>
+    <p>Les Golden sont des sushis panés et frits. Leur prix est inclus dans le total de votre box.</p>
     <h3>Quels moyens de paiement ?</h3>
     <p>Le paiement en ligne sera disponible au lancement. Votre carte peut être enregistrée dans votre profil, sans que le numéro complet ne soit stocké sur le site.</p>
     <h3>Puis-je annuler ma commande ?</h3>

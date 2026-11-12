@@ -1,4 +1,4 @@
-import { GOLDEN_SUPPLEMENT, ZONE_VILLES } from "../../config.js";
+import { ZONE_VILLES } from "../../config.js";
 import { clearBox, clearCart, saveDraft } from "../../controllers/cart.js";
 import { placeOrder } from "../../controllers/order.js";
 import { BOXES } from "../../data/boxes.js";
@@ -29,7 +29,7 @@ export function pagePanier() {
 
   const b = state.cart.box ? BOXES[state.cart.box] : null;
   const boxLines = b ? Object.entries(state.cart.picks).map(([n,q]) =>
-    `<div class="row"><span>${q} × ${n}</span><span>${gradeOf[n]==="Golden"?"+"+eur(GOLDEN_SUPPLEMENT*q):""}</span></div>`).join("") : "";
+    `<div class="row"><span>${q} × ${n}</span><span></span></div>`).join("") : "";
   const boxBlock = b ? `<div class="panel reveal">
     <h2>${b.name} ${state.cart.mode==="fixed"?'<span class="tag-pre">déjà faite</span>':""}</h2>
     <button class="trash-btn" onclick="clearBox()">🗑 Retirer la box</button>

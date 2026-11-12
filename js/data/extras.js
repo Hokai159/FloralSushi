@@ -12,6 +12,8 @@ EXTRA_ITEMS.tempura = {name:"Tempura crevettes", desc:"Crevettes en tempura crou
 EXTRA_ITEMS.rings = {name:"Oignon rings", desc:"Rondelles d'oignon croustillantes.", group:"Friture",
   sizes:[{n:4,price:4.5},{n:8,price:8.5}], allergens:["Gluten","Œufs","Lait"]};
 
+EXTRA_ITEMS.rouleau = {name:"Rouleau friture", desc:"Un rouleau frit, à ajouter à votre commande.", group:"Friture",
+  sizes:[{n:1,price:10}], allergens:["Gluten","Œufs","Lait"]};
 EXTRA_ITEMS.sauce = {name:"Sauce", desc:"Choisissez sucrée ou salée, 0,20 € la sauce.", group:"Sauces",
   sizes:[{n:"sucree",label:"Sucrée",price:0.2},{n:"salee",label:"Salée",price:0.2}], allergens:["Soja"]};
 

@@ -1,26 +1,26 @@
 export const MENU = {
   Classique: [
-    ["California Saumon Fromage","Saumon, fromage"],
-    ["California Saumon Avocat","Saumon, avocat"],
-    ["California Smoky","Saumon fumé, cheese, ciboulette"],
-    ["California Vegetable","Légumes de saison"],
-    ["California Thon Avocat","Thon, avocat"],
-    ["Californian Thon Boursin","Thon, boursin"],
-    ["California Poulet Fromage","Poulet, fromage"],
-    ["Maki Saumon","Saumon"],
-    ["Maki Avocat","Avocat"],
-    ["Maki Fromage","Fromage"],
-    ["Maki Poivron chèvre","Poivron, chèvre"]
+    ["California Saumon Fromage","Saumon, fromage, riz, feuille d'algue"],
+    ["California Saumon Avocat","Saumon, avocat, riz, feuille d'algue"],
+    ["California Smoky","Saumon fumé, cheese, ciboulette, riz, feuille d'algue"],
+    ["California Vegetable","Légumes de saison, riz, feuille d'algue"],
+    ["California Thon Avocat","Thon, avocat, riz, feuille d'algue"],
+    ["Californian Thon Boursin","Thon, boursin, riz, feuille d'algue"],
+    ["California Poulet Fromage","Poulet, fromage, riz, feuille d'algue"],
+    ["Maki Saumon","Saumon, riz, feuille d'algue"],
+    ["Maki Avocat","Avocat, riz, feuille d'algue"],
+    ["Maki Fromage","Fromage, riz, feuille d'algue"],
+    ["Maki Poivron chèvre","Poivron, chèvre, riz, feuille d'algue"]
   ],
   Signature: [
-    ["California Chicken","Poulet, carotte, oignon, cheese, salade, oignons frits, sauce algérienne"],
-    ["California Avocado Saumon","Saumon, cheese, crème d'avocat"],
-    ["California Salmon Spicy","Saumon, cheese, sauce mayo spicy, oignons frits"],
-    ["California Mimosa","Oeuf, thon, cheese, asperge, mayonnaise"],
-    ["California Tempura","Crevette tempura, cheese, avocat, mayonnaise"],
-    ["California Avocado Poulet Karaage","Poulet karaage, cheese, crème d'avocat, mayonnaise"],
-    ["California Aburi Roll","Saumon, avocat, saumon flambé, cheese"],
-    ["California Italia Fusion","Tomate séchée, chèvre, jambon cru, pesto vert"]
+    ["California Chicken","Poulet, carotte, oignon, cheese, salade, oignons frits, sauce algérienne, riz, feuille d'algue"],
+    ["California Avocado Saumon","Saumon, cheese, crème d'avocat, riz, feuille d'algue"],
+    ["California Salmon Spicy","Saumon, cheese, sauce mayo spicy, oignons frits, riz, feuille d'algue"],
+    ["California Mimosa","Oeuf, thon, cheese, asperge, mayonnaise, riz, feuille d'algue"],
+    ["California Tempura","Crevette tempura, cheese, avocat, mayonnaise, riz, feuille d'algue"],
+    ["California Avocado Poulet Karaage","Poulet karaage, cheese, crème d'avocat, mayonnaise, riz, feuille d'algue"],
+    ["California Aburi Roll","Saumon, avocat, saumon flambé, cheese, riz, feuille d'algue"],
+    ["California Italia Fusion","Tomate séchée, chèvre, jambon cru, pesto vert, riz, feuille d'algue"]
   ],
   Golden: [
     ["Golden Poulet Cheddar","Poulet, cheddar, cheese, frit"],

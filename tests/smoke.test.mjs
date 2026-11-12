@@ -71,6 +71,7 @@ check("4 makis distincts (saumon, avocat, fromage, poivron chèvre)", makis.leng
 const carteTous = pageCarte("tous");
 check("carte : rubriques par type (Maki, California, Frits)", carteTous.includes("<h2>Maki</h2>") && carteTous.includes("<h2>California roll</h2>") && carteTous.includes("<h2>Frits (Golden)</h2>"));
 check("carte : pas de filtre par type", !carteTous.includes('href="#carte/'));
+check("carte : pas de description d'ingrédients sur les cartes", !carteTous.includes("<small>"));
 check("carte : Maki Avocat présent sous Maki", /<h2>Maki<\/h2>[\s\S]*Maki Avocat/.test(carteTous));
 state.protein = "poulet";
 const cartePoulet = pageCarte("tous");
