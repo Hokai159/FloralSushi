@@ -92,10 +92,15 @@ for (const g in MENU) MENU[g].forEach(([n,i]) => ingredientsOf[n] = i);
 // Filtre par protéine principale (un sushi peut être sans protéine listée)
 export const PROTEINS = [
   {id:"tous", label:"Tous"},
-  {id:"poulet", label:"Poulet"},
   {id:"saumon", label:"Saumon"},
   {id:"thon", label:"Thon"},
+  {id:"poulet", label:"Poulet"},
+  {id:"autres", label:"Autres"},
 ];
+// Protéine principale d'un sushi : sert à ranger la carte (« Autres » si aucune)
+export function primaryProtein(name) {
+  return (PROTEIN_OF[name] || [])[0] || "autres";
+}
 export const PROTEIN_OF = {
   "California Saumon Fromage": ["saumon"], "California Saumon Avocat": ["saumon"],
   "California Smoky": ["saumon"], "California Vegetable": [],
@@ -110,5 +115,7 @@ export const PROTEIN_OF = {
   "Golden Campagnard": ["poulet"],
 };
 export function matchesProtein(name, protein) {
-  return protein === "tous" || (PROTEIN_OF[name] || []).includes(protein);
+  if (protein === "tous") return true;
+  if (protein === "autres") return primaryProtein(name) === "autres";
+  return (PROTEIN_OF[name] || []).includes(protein);
 }

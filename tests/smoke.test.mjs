@@ -68,11 +68,14 @@ const { MENU } = await import(J+"data/menu.js");
 const { setProtein } = await import(J+"controllers/filters.js");
 const makis = MENU.Classique.map(([n]) => n).filter(n => n.startsWith("Maki"));
 check("4 makis distincts (saumon, avocat, fromage, poivron chèvre)", makis.length === 4);
+const carteTous = pageCarte("tous");
+check("carte : rubrique Saumon", carteTous.includes("<h2>Saumon</h2>"));
+check("carte : rubrique Autres pour les sushis sans protéine", carteTous.includes("<h2>Autres</h2>"));
+check("carte : Maki Avocat classé dans Autres", /Autres[\s\S]*Maki Avocat/.test(carteTous));
 state.protein = "poulet";
 const cartePoulet = pageCarte("tous");
-check("filtre poulet : la rubrique Maki reste affichée", cartePoulet.includes(">Maki<"));
-check("filtre poulet : la rubrique California reste affichée", cartePoulet.includes(">California roll<"));
-check("filtre poulet : un maki vide affiche un message", cartePoulet.includes("Aucun maki au poulet"));
+check("filtre poulet : rubrique Poulet affichée", cartePoulet.includes("<h2>Poulet</h2>"));
+check("filtre poulet : rubriques Saumon masquées", !cartePoulet.includes("<h2>Saumon</h2>"));
 state.protein = "tous";
 
 console.log(fails ? `\n${fails} échec(s)` : "\nTous les tests passent.");
