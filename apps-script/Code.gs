@@ -1,8 +1,8 @@
 // Réception des commandes et envoi d'une notification Telegram.
 // Les identifiants ne sont PAS dans ce fichier : ils sont dans
 // Apps Script → Paramètres du projet → Propriétés du script
-//   TG_TOKEN : token donné par BotFather
-//   TG_CHAT  : identifiant de la discussion Telegram
+//   TG_TOKEN : 9001853243:AAGhaDnRTF-DrvA8cUhUptEmIm1F7yfhdO8
+//   TG_CHAT  : 9025679648
 
 function doPost(e) {
   const props = PropertiesService.getScriptProperties();
