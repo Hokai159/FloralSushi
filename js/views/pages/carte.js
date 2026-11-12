@@ -1,35 +1,34 @@
-import { PROTEINS, TYPES, gradeOf, ingredientsOf, matchesProtein, primaryProtein, typeOf } from "../../data/menu.js";
+import { TYPES, gradeOf, ingredientsOf, matchesProtein, typeOf } from "../../data/menu.js";
 import { proteinChips } from "../components/filters.js";
 import { state } from "../../state/state.js";
 import { jsStr } from "../../utils/format.js";
 
-// Rubriques rangées par protéine (Saumon, Thon, Poulet, Autres).
-// Le filtre par type (California, Maki, Frits) est en haut de la page.
-export function pageCarte(filter) {
-  const activeType = TYPES.some(t => t.id === filter) ? filter : "tous";
-  const sections = PROTEINS.filter(p => p.id !== "tous");
+// Filtre par protéine en haut (Tous, Saumon, Thon, Poulet, Autres).
+// Les sushis sont affichés par rubrique de type (Maki, California roll, Frits),
+// et chaque rubrique reste visible même si le filtre ne retient rien.
+export function pageCarte() {
+  const sections = TYPES.filter(t => t.id !== "tous");
+  const protein = state.protein;
   return `
   <section class="page-head"><div class="wrap">
     <span class="eyebrow">Notre carte</span>
     <h1 class="display">La carte</h1>
-    <p>Cliquez sur « i » pour voir la photo, les ingrédients et les allergènes.</p>
-    <div class="tabs">${TYPES.map(t => `<a href="#carte/${t.id}" class="${t.id === activeType ? "on" : ""}">${t.label}</a>`).join("")}</div>
+    <p>Filtrez par protéine. Cliquez sur « i » pour voir la photo, les ingrédients et les allergènes.</p>
     ${proteinChips()}
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
-    ${sections.filter(p => state.protein === "tous" || state.protein === p.id).map(p => {
-      const items = Object.entries(gradeOf).filter(([n,g]) =>
-        primaryProtein(n) === p.id && (activeType === "tous" || typeOf(n,g) === activeType));
+    ${sections.map(t => {
+      const items = Object.entries(gradeOf).filter(([n,g]) => typeOf(n,g) === t.id && matchesProtein(n, protein));
       return `
-      <div class="gtitle"><h2>${p.label}</h2><span class="count">${items.length}</span></div>
+      <div class="gtitle"><h2>${t.label}</h2><span class="count">${items.length}</span></div>
       ${items.length ? `<div class="items">${items.map(([n,g]) => `
         <div class="item">
-          <div class="head"><div><span class="type">${g} · ${TYPES.find(t => t.id === typeOf(n,g)).label}</span><b style="display:block">${n}</b></div>
+          <div class="head"><div><span class="type">${g}</span><b style="display:block">${n}</b></div>
             <button class="info-btn" onclick="openItem('${jsStr(n)}')" aria-label="Ingrédients et allergènes">i</button></div>
           <small>${ingredientsOf[n]}</small>
           <button class="link-btn" style="text-align:left;margin-top:8px" onclick="openItem('${jsStr(n)}')">Ingrédients et allergènes →</button>
         </div>`).join("")}</div>`
-        : `<div class="notice">Aucun sushi ${p.id === "autres" ? "sans protéine" : "au " + p.label.toLowerCase()}${activeType !== "tous" ? " dans la rubrique " + TYPES.find(t => t.id === activeType).label : ""} pour le moment.</div>`}`;
+        : `<div class="notice">Aucun ${t.label.toLowerCase()}${protein !== "tous" ? " au " + protein : ""} pour le moment.</div>`}`;
     }).join("")}
   </div></section>`;
 }
