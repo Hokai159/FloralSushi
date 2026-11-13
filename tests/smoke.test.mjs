@@ -81,5 +81,12 @@ check("filtre poulet : California Chicken affiché", cartePoulet.includes("Calif
 check("filtre poulet : saumon masqué", !cartePoulet.includes("California Saumon Avocat"));
 state.protein = "tous";
 
+// 7. Chaque box préfaite contient exactement le nombre de pièces annoncé
+const { PRESETS, BOXES } = await import(J+"data/boxes.js");
+for (const id of Object.keys(PRESETS)) {
+  const total = Object.values(PRESETS[id]).reduce((a,b) => a+b, 0);
+  check(`préfaite ${id} : ${BOXES[id].pieces} pièces`, total === BOXES[id].pieces);
+}
+
 console.log(fails ? `\n${fails} échec(s)` : "\nTous les tests passent.");
 process.exitCode = fails ? 1 : 0;

@@ -6,8 +6,8 @@ export const BOXES = {
   duo:  {name:"Duo box",  pieces:32, price:85, quota:{Classique:16,Signature:12,Golden:4}, offer:true, desc:"32 pièces, pour partager ou faire le plein."},
 
   decouverte_mini: {name:"Mini Découverte", pieces:8, price:22, fixed:true, desc:"8 sushis différents, une pièce de chaque."},
-  decouverte_uno:  {name:"Uno Découverte",  pieces:16, price:42, fixed:true, offer:true, desc:"Toute la carte Classique et Signature, une pièce de chaque."},
-  decouverte_duo:  {name:"Duo Découverte",  pieces:32, price:80, fixed:true, offer:true, desc:"Toute la carte Classique et Signature, deux pièces de chaque."},
+  decouverte_uno:  {name:"Uno Découverte",  pieces:16, price:42, fixed:true, offer:true, desc:"16 sushis de la carte, une pièce de chaque."},
+  decouverte_duo:  {name:"Duo Découverte",  pieces:32, price:80, fixed:true, offer:true, desc:"16 sushis de la carte, deux pièces de chaque."},
 
   full_poulet:  {name:"Mini Full Poulet",  pieces:8, price:25, fixed:true, desc:"8 pièces 100 % poulet : poulet fromage, chicken, karaage."},
   full_fromage: {name:"Mini Full Fromage", pieces:8, price:22, fixed:true, desc:"8 pièces 100 % fromage : saumon fromage, smoky, thon boursin, maki."},
@@ -32,8 +32,18 @@ export const PRESETS = {
     "California Saumon Fromage":1,"California Saumon Avocat":1,"California Smoky":1,"California Thon Avocat":1,
     "California Chicken":1,"California Avocado Saumon":1,"California Tempura":1,"California Italia Fusion":1
   },
-  decouverte_uno: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,1])),
-  decouverte_duo: Object.fromEntries([...MENU.Classique,...MENU.Signature].map(([n]) => [n,2])),
+  decouverte_uno: {
+    "California Saumon Fromage":1, "California Saumon Avocat":1, "California Smoky":1, "California Thon Avocat":1,
+    "Californian Thon Boursin":1, "California Poulet Fromage":1, "Maki Saumon":1, "California Vegetable":1,
+    "California Chicken":1, "California Avocado Saumon":1, "California Salmon Spicy":1, "California Mimosa":1,
+    "California Tempura":1, "California Avocado Poulet Karaage":1, "California Aburi Roll":1, "California Italia Fusion":1
+  },
+  decouverte_duo: {
+    "California Saumon Fromage":2, "California Saumon Avocat":2, "California Smoky":2, "California Thon Avocat":2,
+    "Californian Thon Boursin":2, "California Poulet Fromage":2, "Maki Saumon":2, "California Vegetable":2,
+    "California Chicken":2, "California Avocado Saumon":2, "California Salmon Spicy":2, "California Mimosa":2,
+    "California Tempura":2, "California Avocado Poulet Karaage":2, "California Aburi Roll":2, "California Italia Fusion":2
+  },
   full_poulet:  {"California Poulet Fromage":3,"California Chicken":3,"California Avocado Poulet Karaage":2},
   full_fromage: {"California Saumon Fromage":2,"California Smoky":2,"Californian Thon Boursin":2,"Maki Saumon":2},
   full_frit:    {"Golden Poulet Cheddar":3,"Golden Atlantic Spicy":3,"Golden Campagnard":2}
