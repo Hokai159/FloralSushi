@@ -1,3 +1,4 @@
+import { saveOrderToDb } from "../services/supabase.js";
 import { ZONE_VILLES } from "../config.js";
 import { BOXES } from "../data/boxes.js";
 import { ALLERGENES } from "../data/menu.js";
@@ -35,6 +36,7 @@ export async function placeOrder(e) {
     payment: "À régler à la livraison (démo)"
   };
   const sent = await sendOrder(order);
+  await saveOrderToDb(order);
   const orders = load("fs_orders", []); orders.push(order); store("fs_orders", orders);
   state.cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}}; store("fs_cart", state.cart);
   state.draft = {};

@@ -5,3 +5,7 @@ export const GOLDEN_SUPPLEMENT = 10;   // € par rouleau Golden dans les box à
 export const DELIVERY_FEE = 2;         // € de livraison, ajoutés à la commande
 export const ZONE_VILLES = ["Amiens","Camon","Longueau","Salouël","Dury","Glisy","Rivery","Saleux","Boves"];   // villes desservies (à valider)
 export const SHOP_EMAIL = "benjaminpedrak@gmail.com";   // email pour les demandes de devis
+
+// Base de données Supabase (clé publique uniquement : jamais la clé secrète)
+export const SUPABASE_URL = "https://thnjvhaqmrxzvnygavyt.supabase.co";
+export const SUPABASE_KEY = "sb_publishable_cNpRv-ri3SzyaVTiJljs8g_OANyRt_2";
