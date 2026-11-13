@@ -1,3 +1,4 @@
+import { pageBienvenue } from "../views/pages/bienvenue.js";
 import { cartCount } from "../domain/cart.js";
 import { observeReveals } from "../utils/dom.js";
 import { pageBoxes } from "../views/pages/boxes.js";
@@ -18,7 +19,7 @@ export function render() {
   const scrollY = window.scrollY;
   lastRoute = h;
   const [page, arg] = h.split("/");
-  const views = {accueil:pageAccueil, boxes:pageBoxes, composer:pageComposer, extras:pageExtras, panier:pagePanier, profil:pageProfil};
+  const views = {accueil:pageAccueil, boxes:pageBoxes, composer:pageComposer, extras:pageExtras, panier:pagePanier, profil:pageProfil, bienvenue:pageBienvenue};
   let html;
   if (page === "commande") html = pageCommande(arg);
   else if (page === "carte") html = pageCarte(arg);

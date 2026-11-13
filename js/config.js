@@ -4,3 +4,4 @@ export const SHOP_PHONE = "";        // numéro WhatsApp de la boutique, format 
 export const GOLDEN_SUPPLEMENT = 10;   // € par rouleau Golden dans les box à composer
 export const DELIVERY_FEE = 2;         // € de livraison, ajoutés à la commande
 export const ZONE_VILLES = ["Amiens","Camon","Longueau","Salouël","Dury","Glisy","Rivery","Saleux","Boves"];   // villes desservies (à valider)
+export const SHOP_EMAIL = "";   // email pour les demandes de devis (à renseigner)

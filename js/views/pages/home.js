@@ -1,3 +1,4 @@
+import { homeSections } from "../components/homeSections.js";
 import { boxCards } from "../components/cards.js";
 
 export function pageAccueil() {
@@ -35,6 +36,7 @@ export function pageAccueil() {
     </div>
   </section>
 
+  ${homeSections()}
   <section style="padding-top:0">
     <div class="wrap">
       <span class="eyebrow">La carte</span>

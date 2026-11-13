@@ -15,6 +15,11 @@ export function pageCarte() {
     <h1 class="display">La carte</h1>
     <p>Filtrez par protéine. Cliquez sur « i » pour voir la photo, les ingrédients et les allergènes.</p>
     ${proteinChips()}
+    <a class="card" href="#boxes" style="display:block;margin-top:18px;text-decoration:none">
+      <span class="tag-pre">Première ligne</span>
+      <h3 style="color:var(--bordeaux);text-transform:uppercase;margin-top:8px">Box création</h3>
+      <p class="note">Composez votre box avec les sushis de votre choix.</p>
+    </a>
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
     ${sections.map(t => {
@@ -27,7 +32,7 @@ export function pageCarte() {
             <button class="info-btn" onclick="openItem('${jsStr(n)}')" aria-label="Ingrédients et allergènes">i</button></div>
           <button class="link-btn" style="text-align:left;margin-top:8px" onclick="openItem('${jsStr(n)}')">Ingrédients et allergènes →</button>
         </div>`).join("")}</div>`
-        : `<div class="notice">Aucun ${t.label.toLowerCase()}${protein !== "tous" ? " au " + protein : ""} pour le moment.</div>`}`;
+        : `<div class="notice">${protein !== "tous" ? `Aucun ${t.label.toLowerCase()} au ${protein} pour le moment.` : "Bientôt disponible."}</div>`}`;
     }).join("")}
   </div></section>`;
 }

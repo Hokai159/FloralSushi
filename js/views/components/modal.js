@@ -1,11 +1,15 @@
 import { ALLERGENES, gradeOf, ingredientsOf, typeLabel, typeOf } from "../../data/menu.js";
 import { IMAGES } from "../../data/images.js";
+import { ALLERGEN_INFO } from "../../data/allergens.js";
 
 export function openItem(name) {
   const grade = gradeOf[name];
   const allergens = ALLERGENES[name] || [];
   const chips = allergens.length
-    ? allergens.map(a => `<span class="chip">${a}</span>`).join("")
+    ? allergens.map(a => {
+        const info = ALLERGEN_INFO[a] || {icon:"⚠️", text:a};
+        return `<span class="allergen" tabindex="0" data-tip="${info.text}" title="${info.text}">${info.icon} ${a}</span>`;
+      }).join("")
     : `<span class="chip none">Aucun allergène listé</span>`;
   document.getElementById("modalCard").innerHTML = `
     <button class="modal-close" onclick="closeItem()" aria-label="Fermer">×</button>
@@ -16,6 +20,7 @@ export function openItem(name) {
     <p>${ingredientsOf[name]}</p>
     <h3>Allergènes</h3>
     <div class="chips">${chips}</div>
+    ${allergens.length ? `<ul class="allergen-legend">${allergens.map(a => `<li>${(ALLERGEN_INFO[a]||{icon:"⚠️"}).icon} <b>${a}</b> : ${(ALLERGEN_INFO[a]||{text:a}).text}</li>`).join("")}</ul>` : ""}
     <p class="allergen-note">Informations indicatives, à partir de la recette habituelle. Signalez toute allergie avant de commander : nous ne pouvons pas garantir l'absence de traces.</p>`;
   document.getElementById("modal").classList.add("open");
 }

@@ -54,14 +54,6 @@ export function pageProfil() {
         <div><label>Code postal</label><input name="cp" value="${esc(p.cp)}"></div>
         <div><label>Ville</label><input name="ville" list="villes" value="${esc(p.ville)}"></div>
       </div>
-      <h2 style="margin-top:28px">Moyen de paiement</h2>
-      ${p.card ? `<div class="row"><span>💳 ${p.card.brand} ····${p.card.last4}</span>
-        <button class="btn ghost sm" type="button" onclick="clearCard()">Supprimer</button></div>` : ""}
-      <div class="two">
-        <div><label>Type de carte</label><input name="brand" placeholder="Visa, Mastercard…"></div>
-        <div><label>4 derniers chiffres</label><input name="last4" maxlength="4" inputmode="numeric" placeholder="1234"></div>
-      </div>
-      <p class="note" style="margin-top:12px">Pour votre sécurité, le numéro complet de carte n'est jamais stocké sur ce site. Le paiement réel sera géré par un prestataire sécurisé.</p>
       <div style="text-align:right;margin-top:20px"><button class="btn" type="submit">Enregistrer <span class="arrow">→</span></button></div>
     </form>
   </div></section>`;

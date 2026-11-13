@@ -64,13 +64,19 @@ export const ALLERGENES = {
 
 export const TYPES = [
   {id:"tous", label:"Tous"},
-  {id:"california", label:"California roll"},
+  {id:"california", label:"California Rolls"},
+  {id:"signature", label:"Signature Rolls"},
   {id:"maki", label:"Maki"},
-  {id:"frits", label:"Frits (Golden)"}
+  {id:"sushi", label:"Sushi"},
+  {id:"spring", label:"Spring Rolls"},
+  {id:"golden", label:"Golden Frit"},
+  {id:"gyoza", label:"Gyoza et Yakitori"},
+  {id:"sashimi", label:"Sashimi"},
 ];
 
 export function typeOf(name, grade) {
-  if (grade === "Golden") return "frits";
+  if (grade === "Golden") return "golden";
+  if (grade === "Signature") return "signature";
   if (name.startsWith("Maki")) return "maki";
   return "california";
 }

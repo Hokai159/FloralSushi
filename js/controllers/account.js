@@ -17,7 +17,7 @@ export async function register(e) {
   all[email] = {hash: await hashPwd(email, pwd), profile: null};
   store("fs_users", all);
   state.session = email; store("fs_session", state.session);
-  refreshProfile(); toast("Compte créé ✓ Bienvenue !"); render();
+  refreshProfile(); location.hash = "bienvenue";
 }
 
 export async function login(e) {

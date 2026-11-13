@@ -44,10 +44,6 @@ export function pagePanier() {
     const label = day.toLocaleDateString("fr-FR", {weekday:"long", day:"numeric", month:"long"});
     ["18:00","19:00","20:00","21:00"].forEach(h => slots.push(`<option value="${label} ${h}">${label} à ${h}</option>`));
   }
-  const card = state.profile && state.profile.card
-    ? `<div class="notice" style="background:var(--ink);color:#fff">💳 ${state.profile.card.brand} ····${state.profile.card.last4} · enregistrée dans votre profil</div>`
-    : `<div class="notice">Aucun moyen de paiement enregistré. <a href="#profil">Ajouter dans Mon profil</a></div>`;
-
   const offerRow = b ? offerItems(b).map(o => `<div class="row offer"><span>${o.label}<small>${o.note}</small></span><span>0,00 €</span></div>`).join("") : "";
 
   return `
@@ -77,8 +73,6 @@ export function pagePanier() {
           <label>Créneau de livraison</label>
           <select name="slot" required><option value="">Choisir…</option>${slots.join("")}</select>
           ${b && b.sauces ? `<div class="two"><div><label>Sauces sucrées offertes</label><input type="number" name="sauce_sucree" min="0" max="${b.sauces}" value="${esc(state.draft.sauce_sucree || "0")}"></div><div><label>Sauces salées offertes</label><input type="number" name="sauce_salee" min="0" max="${b.sauces}" value="${esc(state.draft.sauce_salee || "0")}"></div></div><p class="note">${b.sauces} sauce(s) offerte(s) avec cette box.</p>` : ""}
-          <h2 style="margin-top:26px">Paiement</h2>
-          ${card}
           <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap">
             <p class="note" style="max-width:320px">Mode démonstration : aucun paiement réel n'est effectué.</p>
             <button class="btn" type="submit">Valider ma commande <span class="arrow">→</span></button>
