@@ -27,6 +27,7 @@ export function pageAccueil() {
     ${Array(2).fill(`<span>Classique <em>✿</em> Signature <em>✿</em> Golden <em>✿</em> Créations uniques <em>✿</em></span>`).join("")}
   </div></div>
 
+  ${homeSections()}
   <section>
     <div class="wrap">
       <span class="eyebrow">Nos formats</span>
@@ -36,7 +37,6 @@ export function pageAccueil() {
     </div>
   </section>
 
-  ${homeSections()}
   <section style="padding-top:0">
     <div class="wrap">
       <span class="eyebrow">La carte</span>

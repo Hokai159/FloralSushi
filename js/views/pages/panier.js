@@ -3,39 +3,42 @@ import { clearBox, clearCart, saveDraft } from "../../controllers/cart.js";
 import { placeOrder } from "../../controllers/order.js";
 import { BOXES } from "../../data/boxes.js";
 import { gradeOf } from "../../data/menu.js";
-import { boxTotal, canCheckout, deliveryFee, extraLines, grandTotal, isComplete, tipAmount } from "../../domain/cart.js";
+import { boxTotal, canCheckout, deliveryFee, extraLines, grandTotal, hasExtras, isComplete, tipAmount } from "../../domain/cart.js";
 import { offerItems } from "../../domain/offers.js";
 import { state } from "../../state/state.js";
 import { esc, eur } from "../../utils/format.js";
 import { extraRow, tipBlock } from "../components/cartParts.js";
 
+// Le panier affiche toujours son contenu (box et extras).
+// Seul le formulaire de commande attend que la box soit complète.
 export function pagePanier() {
-  const extrasLines = extraLines().map(([k,e]) =>
-    extraRow(k,e)).join("");
+  const hasBox = !!state.cart.box;
+  if (!hasBox && !hasExtras()) return `
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1>
+      <div class="notice" style="margin-top:20px">Votre panier est vide.</div>
+      <a class="btn" href="#boxes" style="margin-top:20px">Choisir une box <span class="arrow">→</span></a></div></section>`;
+
+  const b = hasBox ? BOXES[state.cart.box] : null;
+  const incomplete = hasBox && !isComplete();
+  const ready = canCheckout();
+
+  const extrasLines = extraLines().map(([k,e]) => extraRow(k,e)).join("");
   const extrasBlock = `<div class="panel reveal"><h2>Extras</h2>
     ${extrasLines || `<p class="note">Aucun extra pour le moment.</p>`}
     <div style="margin-top:12px"><a class="btn ghost sm" href="#extras">Ajouter des extras</a></div></div>`;
 
-  if (state.cart.box && !isComplete()) return `
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1>
-      <div class="notice" style="margin-top:20px">Votre box n'est pas encore complète.</div>
-      <a class="btn" href="#composer" style="margin-top:20px">Retourner composer <span class="arrow">→</span></a></div></section>`;
-
-  if (!canCheckout()) return `
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1>
-      <div class="notice" style="margin-top:20px">Votre panier est vide.</div>
-      <a class="btn" href="#boxes" style="margin-top:20px">Choisir une box <span class="arrow">→</span></a></div></section>
-    <section style="padding-top:10px"><div class="wrap" style="max-width:760px">${extrasBlock}</div></section>`;
-
-  const b = state.cart.box ? BOXES[state.cart.box] : null;
   const boxLines = b ? Object.entries(state.cart.picks).map(([n,q]) =>
     `<div class="row"><span>${q} × ${n}</span><span></span></div>`).join("") : "";
   const boxBlock = b ? `<div class="panel reveal">
-    <h2>${b.name} ${state.cart.mode==="fixed"?'<span class="tag-pre">déjà faite</span>':""}</h2>
+    <h2>${b.name} ${state.cart.mode === "fixed" ? '<span class="tag-pre">déjà faite</span>' : ""}</h2>
     <button class="trash-btn" onclick="clearBox()">🗑 Retirer la box</button>
     ${boxLines}
     <div class="row"><b>Box</b><b>${eur(boxTotal())}</b></div>
   </div>` : "";
+
+  const notice = incomplete
+    ? `<div class="notice" style="margin-bottom:20px">Votre box n'est pas encore complète. <a href="#composer">Terminer ma box →</a> Vos extras restent dans le panier.</div>`
+    : "";
 
   const addr = {...(state.profile || {}), ...state.draft};
   const slots = [];
@@ -46,13 +49,7 @@ export function pagePanier() {
   }
   const offerRow = b ? offerItems(b).map(o => `<div class="row offer"><span>${o.label}<small>${o.note}</small></span><span>0,00 €</span></div>`).join("") : "";
 
-  return `
-  <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Presque prêt</h1></div></section>
-  <section style="padding-top:10px"><div class="wrap">
-    <div class="two-col">
-      <div>
-        ${boxBlock}
-        ${extrasBlock}
+  const form = ready ? `
         <form class="panel reveal" onsubmit="placeOrder(event)" oninput="saveDraft(this)">
           <h2>Vos coordonnées</h2>
           <div class="two">
@@ -68,7 +65,7 @@ export function pagePanier() {
           <div class="two">
             <div><label>Code postal</label><input name="cp" required value="${esc(addr.cp)}"></div>
             <div><label>Ville</label><input name="ville" required list="villes" value="${esc(addr.ville)}">
-              <datalist id="villes">${ZONE_VILLES.map(v=>`<option value="${v}">`).join("")}</datalist></div>
+              <datalist id="villes">${ZONE_VILLES.map(v => `<option value="${v}">`).join("")}</datalist></div>
           </div>
           <label>Créneau de livraison</label>
           <select name="slot" required><option value="">Choisir…</option>${slots.join("")}</select>
@@ -77,12 +74,23 @@ export function pagePanier() {
             <p class="note" style="max-width:320px">Mode démonstration : aucun paiement réel n'est effectué.</p>
             <button class="btn" type="submit">Valider ma commande <span class="arrow">→</span></button>
           </div>
-        </form>
+        </form>`
+    : `<div class="panel reveal"><h2>Commande</h2><p class="note">Complétez votre box pour pouvoir valider la commande.</p></div>`;
+
+  return `
+  <section class="page-head"><div class="wrap"><span class="eyebrow">Panier</span><h1 class="display">Mon panier</h1></div></section>
+  <section style="padding-top:10px"><div class="wrap">
+    <div class="two-col">
+      <div>
+        ${notice}
+        ${boxBlock}
+        ${extrasBlock}
+        ${form}
       </div>
       <aside class="panel summary reveal">
         <h2>Récap</h2>
         ${b ? `<div class="row"><span>${b.name}</span><span>${eur(boxTotal())}</span></div>` : ""}
-        ${extrasLines ? extraLines().map(([k,e]) => extraRow(k,e)).join("") : ""}
+        ${extraLines().map(([k,e]) => extraRow(k,e)).join("")}
         ${offerRow}
         <div class="row fee"><span>Livraison</span><span>${eur(deliveryFee())}</span></div>
         ${tipBlock()}

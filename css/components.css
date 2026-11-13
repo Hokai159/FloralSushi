@@ -132,3 +132,16 @@ footer a:hover{color:#fff;text-decoration:underline}
 .tabs button.on{background:var(--bordeaux);color:#fff}
 .protein-filter{margin-top:14px}
 .item-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;margin:6px 0 14px}
+
+/* Bandeau d'action (carte) */
+.banner{display:flex;justify-content:space-between;align-items:center;background:var(--bordeaux);color:#fff;border-radius:var(--radius);padding:20px 28px;text-decoration:none;font-weight:800;font-size:1.3rem;text-transform:uppercase;margin-top:18px;box-shadow:var(--shadow);transition:transform .3s var(--ease)}
+.banner:hover{transform:translateY(-3px)}
+.banner .arrow{transition:transform .3s var(--ease)}
+.banner:hover .arrow{transform:translateX(6px)}
+/* Mise en avant : nouveautés et éditions limitées */
+.promo{background:linear-gradient(135deg,var(--bordeaux),var(--bordeaux-2));color:#fff;border-radius:var(--radius);padding:clamp(24px,4vw,40px);margin:0 0 20px;box-shadow:var(--shadow)}
+.promo .eyebrow{color:var(--gold)}
+.promo .section-title{color:#fff}
+.promo .card{background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
+.promo .card h3{color:var(--gold)}
+.promo .card .note{color:var(--rose)}

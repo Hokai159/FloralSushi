@@ -15,11 +15,7 @@ export function pageCarte() {
     <h1 class="display">La carte</h1>
     <p>Filtrez par protéine. Cliquez sur « i » pour voir la photo, les ingrédients et les allergènes.</p>
     ${proteinChips()}
-    <a class="card" href="#boxes" style="display:block;margin-top:18px;text-decoration:none">
-      <span class="tag-pre">Première ligne</span>
-      <h3 style="color:var(--bordeaux);text-transform:uppercase;margin-top:8px">Box création</h3>
-      <p class="note">Composez votre box avec les sushis de votre choix.</p>
-    </a>
+    <a class="banner" href="#boxes">Composer ma box <span class="arrow">→</span></a>
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
     ${sections.map(t => {

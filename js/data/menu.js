@@ -70,11 +70,11 @@ export const TYPES = [
   {id:"sushi", label:"Sushi"},
   {id:"spring", label:"Spring Rolls"},
   {id:"golden", label:"Golden Frit"},
-  {id:"gyoza", label:"Gyoza et Yakitori"},
-  {id:"sashimi", label:"Sashimi"},
 ];
 
 export function typeOf(name, grade) {
+  if (grade === "Sushi") return "sushi";
+  if (grade === "Spring") return "spring";
   if (grade === "Golden") return "golden";
   if (grade === "Signature") return "signature";
   if (name.startsWith("Maki")) return "maki";
@@ -125,3 +125,22 @@ export function matchesProtein(name, protein) {
   if (protein === "autres") return primaryProtein(name) === "autres";
   return (PROTEIN_OF[name] || []).includes(protein);
 }
+
+// Sushis et spring rolls : présents dans la carte, hors box
+const CARTE_ONLY = {
+  "Sushi Saumon": {grade:"Sushi", ing:"Saumon, riz", all:["Gluten","Soja","Poisson"], prot:["saumon"]},
+  "Sushi Thon": {grade:"Sushi", ing:"Thon, riz", all:["Gluten","Soja","Poisson"], prot:["thon"]},
+  "Sushi Crevette": {grade:"Sushi", ing:"Crevette, riz", all:["Gluten","Soja","Crustacés"], prot:[]},
+  "Sushi Saumon Fromage": {grade:"Sushi", ing:"Saumon, fromage, riz", all:["Gluten","Soja","Poisson","Lait"], prot:["saumon"]},
+  "Sushi Thon Fromage": {grade:"Sushi", ing:"Thon, fromage, riz", all:["Gluten","Soja","Poisson","Lait"], prot:["thon"]},
+  "Spring Roll Légumes": {grade:"Spring", ing:"Vermicelles, carotte, chou, pousses de soja", all:["Gluten","Soja"], prot:[]},
+  "Spring Roll Crevette": {grade:"Spring", ing:"Crevette, vermicelles, carotte, chou", all:["Gluten","Soja","Crustacés"], prot:[]},
+};
+for (const n in CARTE_ONLY) {
+  const c = CARTE_ONLY[n];
+  gradeOf[n] = c.grade;
+  ingredientsOf[n] = c.ing;
+  ALLERGENES[n] = c.all;
+  PROTEIN_OF[n] = c.prot;
+}
+
