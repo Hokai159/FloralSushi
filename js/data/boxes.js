@@ -1,9 +1,9 @@
 import { MENU } from "./menu.js";
 
 export const BOXES = {
-  mini: {name:"Mini box", pieces:8, price:25, quota:{Classique:4, Signature:3, Golden:1}, desc:"8 pièces, à composer dans les 3 grades."},
-  uno:  {name:"Uno box",  pieces:16, price:45, quota:{Classique:8, Signature:6, Golden:2}, offer:true, desc:"16 pièces, l'équilibre entre les grades."},
-  duo:  {name:"Duo box",  pieces:32, price:85, quota:{Classique:16,Signature:12,Golden:4}, offer:true, desc:"32 pièces, pour partager ou faire le plein."},
+  mini: {name:"Mini box", pieces:8, price:25, quota:{Classique:4, Signature:4}, desc:"8 pièces, à composer en Classique et Signature."},
+  uno:  {name:"Uno box",  pieces:16, price:45, quota:{Classique:8, Signature:8}, offer:true, desc:"16 pièces, à composer en Classique et Signature."},
+  duo:  {name:"Duo box",  pieces:32, price:85, quota:{Classique:16,Signature:16}, offer:true, desc:"32 pièces, pour partager ou faire le plein."},
 
   decouverte_mini: {name:"Mini Découverte", pieces:8, price:22, fixed:true, desc:"8 sushis différents, une pièce de chaque."},
   decouverte_uno:  {name:"Uno Découverte",  pieces:16, price:42, fixed:true, offer:true, desc:"16 sushis de la carte, une pièce de chaque."},

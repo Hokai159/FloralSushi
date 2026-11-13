@@ -18,7 +18,7 @@ export function pageInfos(k) {
     <h3>Propriété intellectuelle</h3>
     <p>Les textes, photographies, logos et éléments graphiques du site sont protégés. Toute reproduction sans autorisation écrite est interdite.</p>
     <h3>Données personnelles</h3>
-    <p>Les informations saisies (nom, adresse, téléphone, email) servent uniquement à préparer et livrer vos commandes. Elles ne sont pas revendues. Les commandes sont stockées dans un tableur accessible uniquement par la boutique. Vous pouvez demander l'accès, la rectification ou la suppression de vos données en nous contactant. Les données de profil sont enregistrées dans votre navigateur.</p>
+    <p>Les informations saisies (nom, adresse, téléphone, email) servent uniquement à préparer et livrer vos commandes. Elles ne sont pas revendues. Les commandes et les comptes clients sont stockés dans une base de données sécurisée (Supabase, hébergée en Europe), accessible uniquement par la boutique. Vous pouvez demander l'accès, la rectification ou la suppression de vos données en nous contactant. Les données de profil sont enregistrées dans votre navigateur.</p>
     <h3>Cookies et stockage</h3>
     <p>Le site n'utilise pas de cookies publicitaires. Il enregistre dans votre navigateur votre panier et votre profil, pour votre confort.</p>
     <h3>Allergènes</h3>
@@ -42,7 +42,7 @@ export function pageInfos(k) {
     <h3>Les sushis sont-ils faits maison ?</h3>
     <p>Oui, ils sont préparés chaque jour.</p>
     <h3>Comment fonctionne le supplément Golden ?</h3>
-    <p>Les Golden sont des sushis panés et frits. Leur prix est inclus dans le total de votre box.</p>
+    <p>Les Golden sont des sushis panés et frits. Ils se commandent en extra (rubrique Friture), à 10 € le rouleau. Ils restent visibles dans la carte.</p>
     <h3>Quels moyens de paiement ?</h3>
     <p>Le paiement en ligne sera disponible au lancement. Votre carte peut être enregistrée dans votre profil, sans que le numéro complet ne soit stocké sur le site.</p>
     <h3>Puis-je annuler ma commande ?</h3>

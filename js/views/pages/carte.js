@@ -16,6 +16,7 @@ export function pageCarte() {
     <p>Filtrez par protéine. Cliquez sur « i » pour voir la photo, les ingrédients et les allergènes.</p>
     ${proteinChips()}
     <a class="banner" href="#boxes">Composer ma box <span class="arrow">→</span></a>
+    <a class="banner" href="#poke" style="background:var(--gold)">Composer mon poké bowl <span class="arrow">→</span></a>
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
     ${sections.map(t => {

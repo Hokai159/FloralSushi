@@ -3,7 +3,9 @@ import { clearBox, clearCart, saveDraft } from "../../controllers/cart.js";
 import { placeOrder } from "../../controllers/order.js";
 import { BOXES } from "../../data/boxes.js";
 import { gradeOf } from "../../data/menu.js";
-import { boxTotal, canCheckout, deliveryFee, extraLines, grandTotal, hasExtras, isComplete, tipAmount } from "../../domain/cart.js";
+import { boxTotal, canCheckout, deliveryFee, extraLines, grandTotal, hasExtras, isComplete, pokesTotal, tipAmount } from "../../domain/cart.js";
+import { removePoke } from "../../controllers/poke.js";
+import { rewardsOf } from "../../domain/loyalty.js";
 import { offerItems } from "../../domain/offers.js";
 import { state } from "../../state/state.js";
 import { esc, eur } from "../../utils/format.js";
@@ -36,6 +38,10 @@ export function pagePanier() {
     <div class="row"><b>Box</b><b>${eur(boxTotal())}</b></div>
   </div>` : "";
 
+  const pokeBlock = (state.cart.pokes || []).length ? `<div class="panel reveal"><h2>Poké bowls</h2>
+    ${state.cart.pokes.map(p => `<div class="row"><span>Poké ${esc(p.sizeLabel)} · ${esc(p.selection.protein.join(", "))}<small>${esc(p.selection.sauce.join(", "))}</small></span><span>${eur(p.price)} <button class="trash" onclick="removePoke(${p.id})" aria-label="Retirer">🗑</button></span></div>`).join("")}
+    </div>` : "";
+
   const notice = incomplete
     ? `<div class="notice" style="margin-bottom:20px">Votre box n'est pas encore complète. <a href="#composer">Terminer ma box →</a> Vos extras restent dans le panier.</div>`
     : "";
@@ -49,6 +55,10 @@ export function pagePanier() {
   }
   const offerRow = b ? offerItems(b).map(o => `<div class="row offer"><span>${o.label}<small>${o.note}</small></span><span>0,00 €</span></div>`).join("") : "";
 
+  const lots = state.session ? rewardsOf(state.orders || []) : [];
+  const rewardBlock = lots.length ? `<h2 style="margin-top:26px">Fidélité</h2>
+          <label><input type="radio" name="reward" value="" ${state.draft.reward ? "" : "checked"} style="width:auto"> Ne pas utiliser de lot</label>
+          ${lots.map(r => `<label><input type="radio" name="reward" value="${r.key}" ${state.draft.reward === r.key ? "checked" : ""} style="width:auto"> 🎁 ${r.lot.label} (offert)</label>`).join("")}` : "";
   const form = ready ? `
         <form class="panel reveal" onsubmit="placeOrder(event)" oninput="saveDraft(this)">
           <h2>Vos coordonnées</h2>
@@ -69,6 +79,7 @@ export function pagePanier() {
           </div>
           <label>Créneau de livraison</label>
           <select name="slot" required><option value="">Choisir…</option>${slots.join("")}</select>
+          ${rewardBlock}
           ${b && b.sauces ? `<div class="two"><div><label>Sauces sucrées offertes</label><input type="number" name="sauce_sucree" min="0" max="${b.sauces}" value="${esc(state.draft.sauce_sucree || "0")}"></div><div><label>Sauces salées offertes</label><input type="number" name="sauce_salee" min="0" max="${b.sauces}" value="${esc(state.draft.sauce_salee || "0")}"></div></div><p class="note">${b.sauces} sauce(s) offerte(s) avec cette box.</p>` : ""}
           <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap">
             <p class="note" style="max-width:320px">Mode démonstration : aucun paiement réel n'est effectué.</p>
@@ -85,11 +96,13 @@ export function pagePanier() {
         ${notice}
         ${boxBlock}
         ${extrasBlock}
+        ${pokeBlock}
         ${form}
       </div>
       <aside class="panel summary reveal">
         <h2>Récap</h2>
         ${b ? `<div class="row"><span>${b.name}</span><span>${eur(boxTotal())}</span></div>` : ""}
+        ${(state.cart.pokes || []).map(p => `<div class="row"><span>Poké ${esc(p.sizeLabel)}</span><span>${eur(p.price)}</span></div>`).join("")}
         ${extraLines().map(([k,e]) => extraRow(k,e)).join("")}
         ${offerRow}
         <div class="row fee"><span>Livraison</span><span>${eur(deliveryFee())}</span></div>

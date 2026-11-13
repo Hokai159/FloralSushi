@@ -1,4 +1,4 @@
-import { DELIVERY_FEE, GOLDEN_SUPPLEMENT } from "../config.js";
+import { DELIVERY_FEE } from "../config.js";
 import { BOXES } from "../data/boxes.js";
 import { GRADES, gradeOf } from "../data/menu.js";
 import { sizePrice } from "./extras.js";
@@ -15,7 +15,6 @@ export function boxTotal() {
   const b = BOXES[state.cart.box];
   if (b.fixed) return b.price;
   let t = b.price;
-  for (const n in state.cart.picks) if (gradeOf[n] === "Golden") t += GOLDEN_SUPPLEMENT * state.cart.picks[n];
   return t;
 }
 
@@ -30,13 +29,14 @@ export function extraLines() {
 
 export function extrasTotal() { return extraLines().reduce((t,[k,e]) => t + sizePrice(k, e.size) * e.qty, 0); }
 
-export function hasExtras() { return extraLines().length > 0; }
+export function pokesTotal() { return (state.cart.pokes || []).reduce((t,p) => t + p.price, 0); }
+export function hasExtras() { return extraLines().length > 0 || (state.cart.pokes || []).length > 0; }
 
 export function deliveryFee() { return (state.cart.box || hasExtras()) ? DELIVERY_FEE : 0; }
 
 export function tipAmount() { return state.cart.tip && state.cart.tip.on ? state.cart.tip.amount : 0; }
 
-export function grandTotal() { return boxTotal() + extrasTotal() + deliveryFee() + tipAmount(); }
+export function grandTotal() { return boxTotal() + extrasTotal() + pokesTotal() + deliveryFee() + tipAmount(); }
 
 export function isComplete() {
   if (!state.cart.box) return false;
@@ -51,7 +51,7 @@ export function canCheckout() {
 }
 
 export function cartCount() {
-  return Object.values(state.cart.picks).reduce((a,b)=>a+b,0) + extraLines().reduce((a,[,e])=>a+e.qty,0);
+  return Object.values(state.cart.picks).reduce((a,b)=>a+b,0) + extraLines().reduce((a,[,e])=>a+e.qty,0) + (state.cart.pokes || []).length;
 }
 
 /* ===== ACTIONS ===== */

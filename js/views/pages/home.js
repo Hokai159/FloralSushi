@@ -44,7 +44,7 @@ export function pageAccueil() {
       <div class="grades">
         <div class="grade c reveal"><h3>Classique</h3><p>Les essentiels : saumon, thon, poulet, avocat, fromage.</p></div>
         <div class="grade s reveal" style="transition-delay:120ms"><h3>Signature</h3><p>Nos créations maison : Aburi, Italia Fusion, Karaage, Tempura.</p></div>
-        <div class="grade g reveal" style="transition-delay:240ms"><h3>Golden</h3><p>Panés et frits, pour les gourmands.</p></div>
+        <div class="grade g reveal" style="transition-delay:240ms"><h3>Golden</h3><p>Panés et frits. Disponibles en extra, à 10 € le rouleau.</p></div>
       </div>
     </div>
   </section>`;

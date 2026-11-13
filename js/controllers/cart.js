@@ -59,7 +59,7 @@ export function clearBox() {
 }
 
 export function clearCart() {
-  state.cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}};
+  state.cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}, pokes:[]};
   store("fs_cart", state.cart); toast("Panier vidé"); render();
 }
 

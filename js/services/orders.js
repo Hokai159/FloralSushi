@@ -21,11 +21,29 @@ export function orderText(o) {
   return lines.join("\n");
 }
 
+// Détail des produits de la commande, pour le compteur quotidien
+export function countsOf(box) {
+  const produits = {};
+  if (box) for (const n in state.cart.picks) produits[n] = (produits[n] || 0) + state.cart.picks[n];
+  for (const [k, e] of extraLines()) {
+    if (k === "rouleau") produits["Golden (rouleau frit)"] = (produits["Golden (rouleau frit)"] || 0) + e.qty;
+  }
+  const sushis = Object.values(produits).reduce((a, b) => a + b, 0);
+  return {produits, sushis, pokes: (state.cart.pokes || []).length};
+}
+
 export function buildResume(box, offered) {
   const L = [];
   if (box) {
     L.push(`📦 ${box.name}`);
     for (const n in state.cart.picks) L.push(`   • ${state.cart.picks[n]} × ${n}`);
+  }
+  for (const p of state.cart.pokes || []) {
+    L.push(`🥗 Poké bowl ${p.sizeLabel} : ${p.price.toFixed(2).replace(".", ",")} €`);
+    L.push(`   • Protéine : ${p.selection.protein.join(", ")}`);
+    if (p.selection.toppings.length) L.push(`   • Toppings : ${p.selection.toppings.join(", ")}`);
+    if (p.selection.graines.length) L.push(`   • Graines : ${p.selection.graines.join(", ")}`);
+    L.push(`   • Sauce : ${p.selection.sauce.join(", ")}`);
   }
   const groups = {};
   const get = (id, name, emoji, unit) => groups[id] || (groups[id] = {name, emoji, unit, total:0, paid:0, off:0, parts:[]});

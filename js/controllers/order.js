@@ -4,8 +4,9 @@ import { BOXES } from "../data/boxes.js";
 import { ALLERGENES } from "../data/menu.js";
 import { deliveryFee, extraLines, grandTotal, tipAmount } from "../domain/cart.js";
 import { offerItems } from "../domain/offers.js";
-import { buildResume, sendOrder } from "../services/orders.js";
+import { buildResume, countsOf, sendOrder } from "../services/orders.js";
 import { state } from "../state/state.js";
+import { rewardsOf } from "../domain/loyalty.js";
 import { load, store } from "../state/storage.js";
 import { toast } from "../views/components/toast.js";
 
@@ -31,14 +32,26 @@ export async function placeOrder(e) {
     extras: extraLines().map(([k,e]) => ({k, size:e.size, qty:e.qty})),
     offer: box ? offerItems(box).map(o => o.label).join(" + ") : null,
     resume: buildResume(box, offered),
+    counts: countsOf(box),
+    customerId: state.session ? state.session.id : null,
+    email: state.session ? state.session.email : null,
+    reward: null,
     delivery: deliveryFee(), tip: tipAmount(),
     total: grandTotal(), address: addr, slot: f.get("slot"),
     payment: "À régler à la livraison (démo)"
   };
+  const rewardKey = state.session ? f.get("reward") : null;
+  if (rewardKey) {
+    const dispo = rewardsOf(state.orders || []).find(r => r.key === rewardKey);
+    if (dispo) {
+      order.reward = rewardKey;
+      order.resume = [...order.resume, `🎁 Fidélité : ${dispo.lot.resume} (offert)`];
+    }
+  }
   const sent = await sendOrder(order);
   await saveOrderToDb(order);
   const orders = load("fs_orders", []); orders.push(order); store("fs_orders", orders);
-  state.cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}}; store("fs_cart", state.cart);
+  state.cart = {box:null, mode:null, picks:{}, extras:{}, tip:{on:false, amount:0}, pokes:[]}; store("fs_cart", state.cart);
   state.draft = {};
   order.sent = sent;
   store("fs_orders", orders);

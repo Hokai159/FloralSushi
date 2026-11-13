@@ -24,23 +24,22 @@ let fails = 0;
 const check = (label, cond) => { console.log((cond ? "OK   " : "FAIL ") + label); if (!cond) fails++; };
 const near = (a, b) => Math.abs(a - b) < 1e-9;
 
-// 1. Box Mini composée : 4 Classique, 3 Signature, 1 Golden → 25 € + 10 € de supplément Golden
+// 1. Box Mini composée : 4 Classique et 4 Signature, prix de base sans supplément
 state.cart = { box:"mini", mode:"custom", picks:{
   "California Saumon Fromage":2, "California Smoky":2,
-  "California Chicken":1, "California Tempura":1, "California Avocado Saumon":1,
-  "Golden Poulet Cheddar":1 }, extras:{}, tip:{on:false, amount:0} };
-check("total box Mini avec Golden = 35 €", near(cart.boxTotal(), 35));
+  "California Chicken":2, "California Tempura":2 }, extras:{}, tip:{on:false, amount:0} };
+check("total box Mini = 25 € (pas de supplément Golden)", near(cart.boxTotal(), 25));
 check("box complète", cart.isComplete() === true);
 
 // 2. Extras par format : karaage ×4 (1), mochi matcha ×2 (2), tempura ×2 (1)
 state.cart.extras = { karaage:{"4":1}, mochi_matcha:{"2":2}, tempura:{"2":1} };
 check("extras : 6,50 + 13 + 3,50 = 23 €", near(cart.extrasTotal(), 23));
 check("livraison 2 € quand il y a une box", cart.deliveryFee() === 2);
-check("total général = 35 + 23 + 2 = 60 €", near(cart.grandTotal(), 60));
+check("total général = 25 + 23 + 2 = 50 €", near(cart.grandTotal(), 50));
 
 // 3. Pourboire ajouté au total
 state.cart.tip = { on:true, amount:5 };
-check("pourboire ajouté au total (65 €)", near(cart.grandTotal(), 65));
+check("pourboire ajouté au total (55 €)", near(cart.grandTotal(), 55));
 state.cart.tip = { on:false, amount:0 };
 
 // 4. Résumé regroupé par produit, sans détail de calcul
@@ -87,6 +86,21 @@ for (const id of Object.keys(PRESETS)) {
   const total = Object.values(PRESETS[id]).reduce((a,b) => a+b, 0);
   check(`préfaite ${id} : ${BOXES[id].pieces} pièces`, total === BOXES[id].pieces);
 }
+
+// 8. Poké bowl : prix de base, ingrédients en plus, validation
+const { pokePrice, pokeIsValid } = await import(J+"domain/poke.js");
+check("poké moyen sans extra = 15 €", pokePrice("moyen", {protein:["Saumon"], toppings:[], graines:[], sauce:["Soja salé"]}) === 15);
+check("poké moyen avec 2 protéines = 15 + 2,50 = 17,50 €", pokePrice("moyen", {protein:["Saumon","Crevette"], toppings:[], graines:[], sauce:["Soja salé"]}) === 17.5);
+check("poké : 5 toppings = 1 € en plus", pokePrice("petit", {protein:["Saumon"], toppings:["a","b","c","d","e"], graines:[], sauce:["s"]}) === 13);
+check("poké invalide sans sauce", pokeIsValid({protein:["Saumon"], toppings:[], graines:[], sauce:[]}) === false);
+
+// 9. Fidélité : 2,50 points par euro, lots débloqués et utilisables une seule fois
+const { pointsOf, rewardsOf } = await import(J+"domain/loyalty.js");
+const commandes = [{total:100, reward:null}];          // 250 points
+check("100 € = 250 points", pointsOf(commandes) === 250);
+check("250 points : petit, moyen et grand disponibles", rewardsOf(commandes).length === 3);
+const utilisee = [{total:100, reward:"0-petit"}];
+check("lot utilisé ne réapparaît pas", rewardsOf(utilisee).every(r => r.key !== "0-petit"));
 
 console.log(fails ? `\n${fails} échec(s)` : "\nTous les tests passent.");
 process.exitCode = fails ? 1 : 0;

@@ -29,7 +29,7 @@ export const MENU = {
   ]
 };
 
-export const GRADES = ["Classique","Signature","Golden"];
+export const GRADES = ["Classique","Signature"];
 
 /* Allergènes : base indicative (sauce soja) + ingrédients listés */
 

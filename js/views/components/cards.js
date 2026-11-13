@@ -24,7 +24,7 @@ export function composedCard(id, i) {
       <span class="num">${b.pieces}</span>
       <h3>${b.name}</h3>
       <p>${b.desc}</p>${baguetteTag(b)}
-      <p style="font-weight:600;margin-top:10px">Classique ${b.quota.Classique} · Signature ${b.quota.Signature} · Golden ${b.quota.Golden}</p>
+      <p style="font-weight:600;margin-top:10px">Classique ${b.quota.Classique} · Signature ${b.quota.Signature}</p>
       <div class="price">${eur(b.price)}</div>
       <div class="actions"><button class="btn sm" onclick="chooseBox('${id}')">Composer <span class="arrow">→</span></button></div>
     </div>`;

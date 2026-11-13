@@ -20,6 +20,9 @@ export async function saveOrderToDb(order) {
     },
     total: order.total,
     tip: order.tip || 0,
+    customer_id: order.customerId || null,
+    email: order.email || null,
+    reward: order.reward || null,
   };
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
