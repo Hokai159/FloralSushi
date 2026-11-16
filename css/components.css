@@ -145,3 +145,29 @@ footer a:hover{color:#fff;text-decoration:underline}
 .promo .card{background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
 .promo .card h3{color:var(--gold)}
 .promo .card .note{color:var(--rose)}
+
+/* Jauge de fidélité : coffrets à ouvrir */
+.gauge-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.gauge-score{font-weight:800;color:var(--bordeaux)}
+.gauge-bar{height:16px;border-radius:999px;background:#eadde3;overflow:hidden;margin:14px 0 6px}
+.gauge-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--gold));border-radius:999px;transition:width .8s var(--ease)}
+.coffrets{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:18px}
+.coffret{display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:2px solid var(--rose);border-radius:20px;padding:20px 14px;font:inherit;color:var(--ink);cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.coffret:disabled{cursor:default;opacity:.6}
+.coffret-icon{font-size:2.4rem}
+.coffret-seuil{font-weight:800;color:var(--bordeaux)}
+.coffret-label{font-size:.9rem;text-align:center}
+.coffret-etat{font-size:.8rem;color:var(--mute)}
+.coffret.verrou{filter:grayscale(1);opacity:.7}
+.coffret.dispo{border-color:var(--gold);box-shadow:0 0 0 0 rgba(201,154,59,.6);animation:pulse 2s infinite}
+.coffret.dispo:hover{transform:translateY(-4px)}
+.coffret.utilise{background:#f6f1f3}
+.coffret.opening{animation:ouvrir .6s var(--ease) forwards}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,154,59,.5)}70%{box-shadow:0 0 0 12px rgba(201,154,59,0)}100%{box-shadow:0 0 0 0 rgba(201,154,59,0)}}
+@keyframes ouvrir{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-4deg)}70%{transform:scale(.96) rotate(3deg)}100%{transform:scale(1.05);background:linear-gradient(135deg,#fff7e6,#f9e6ee)}}
+
+/* Affiche d'une édition limitée */
+.edition-img{width:100%;aspect-ratio:1037/697;object-fit:cover;border-radius:14px;margin-bottom:12px}
+
+/* Photo d'un produit, sous son nom */
+.product-photo{width:100%;height:150px;object-fit:contain;margin:6px 0 4px;border-radius:12px;background:#fbf7f8}

@@ -9,5 +9,5 @@ export const NOUVEAUTES = [
 export const EDITIONS = [
   {titre:"Box Saint-Valentin", periode:"Février", description:"Une box romantique en édition limitée, avec des sushis roses et des douceurs."},
   {titre:"Box Halloween", periode:"Octobre", description:"Une box spéciale Halloween, avec des rouleaux déguisés et une surprise."},
-  {titre:"Box Noël", periode:"Décembre", description:"Une box festive pour les fêtes, en quantité limitée."},
+  {titre:"Box Spéciale Noël", periode:"Décembre", image:"img/edition-noel.jpg", description:"Sushis au foie gras et mangue, crevettes en fête, magret de canard laqué, saumon fumé et bien plus. Édition limitée."},
 ];

@@ -6,6 +6,7 @@ import { state } from "../../state/state.js";
 import { eur, jsStr } from "../../utils/format.js";
 import { openItem } from "../components/modal.js";
 import { toast } from "../components/toast.js";
+import { photo } from "../../data/images.js";
 import { proteinChips } from "../components/filters.js";
 
 export function pageComposer() {
@@ -55,6 +56,7 @@ export function renderGrade(g) {
     return `<div class="item ${q?"picked":""}">
       <div class="head"><div><span class="type">${typeLabel(typeOf(n,g))}</span><b style="display:block">${n}</b></div>
         <button class="info-btn" onclick="openItem('${n2}')" aria-label="Ingrédients et allergènes">i</button></div>
+      ${photo(n)}
       <div class="qty">
         <button onclick="changePick('${n2}',-1)" ${q?"":"disabled"} aria-label="Retirer">−</button>
         <span class="n">${q}</span>

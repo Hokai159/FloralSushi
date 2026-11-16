@@ -2,6 +2,7 @@ import { TYPES, gradeOf, matchesProtein, typeOf } from "../../data/menu.js";
 import { proteinChips } from "../components/filters.js";
 import { state } from "../../state/state.js";
 import { jsStr } from "../../utils/format.js";
+import { photo } from "../../data/images.js";
 
 // Filtre par protéine en haut (Tous, Saumon, Thon, Poulet, Autres).
 // Les sushis sont affichés par rubrique de type (Maki, California roll, Frits),
@@ -27,6 +28,7 @@ export function pageCarte() {
         <div class="item">
           <div class="head"><div><span class="type">${g}</span><b style="display:block">${n}</b></div>
             <button class="info-btn" onclick="openItem('${jsStr(n)}')" aria-label="Ingrédients et allergènes">i</button></div>
+          ${photo(n)}
           <button class="link-btn" style="text-align:left;margin-top:8px" onclick="openItem('${jsStr(n)}')">Ingrédients et allergènes →</button>
         </div>`).join("")}</div>`
         : `<div class="notice">${protein !== "tous" ? `Aucun ${t.label.toLowerCase()} au ${protein} pour le moment.` : "Bientôt disponible."}</div>`}`;

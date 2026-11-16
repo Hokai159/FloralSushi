@@ -1,3 +1,4 @@
+import { photo } from "../../data/images.js";
 import { changeExtra, chooseBox } from "../../controllers/cart.js";
 import { BOXES } from "../../data/boxes.js";
 import { EXTRA_ITEMS } from "../../data/extras.js";
@@ -48,6 +49,7 @@ export function extraCard(key) {
   const any = Object.values(entry).some(q => q > 0);
   return `<div class="item ${any?"picked":""}">
     <div class="head"><div><span class="type">${e.group}</span><b style="display:block">${e.name}</b></div></div>
+      ${photo(e.name)}
     <small>${e.desc}</small>
     ${e.sizes.map(sz => {
       const q = entry[sz.n] || 0;

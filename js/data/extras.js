@@ -17,7 +17,7 @@ EXTRA_ITEMS.rouleau = {name:"Golden (rouleau frit)", desc:"Un rouleau Golden, pa
 EXTRA_ITEMS.sauce = {name:"Sauce", desc:"Choisissez sucrée ou salée, 0,20 € la sauce.", group:"Sauces",
   sizes:[{n:"sucree",label:"Sucrée",price:0.2},{n:"salee",label:"Salée",price:0.2}], allergens:["Soja"]};
 
-export const FLAVORS = ["Matcha","Fraise","Vanille","Chocolat","Mangue"]; // parfums à confirmer
+export const FLAVORS = ["Matcha","Fraise","Vanille","Chocolat","Mangue","Coco","Pistache"]; // parfums à confirmer
 
 FLAVORS.forEach(f => {
   EXTRA_ITEMS["mochi_" + f.toLowerCase()] = {name:"Mochi " + f.toLowerCase(), desc:"Mochi glacé " + f.toLowerCase() + ".", group:"Mochi",
@@ -37,14 +37,23 @@ EXTRA_ITEMS.sashimi_daurade = {name:"Sashimi daurade", desc:"Tranches de daurade
   sizes:[{n:4,price:8},{n:8,price:15}], allergens:["Poisson"]};
 EXTRA_ITEMS.boisson_coca = {name:"Coca-Cola", desc:"Soda divers, canette.", group:"Boissons",
   sizes:[{n:1,label:"Canette 33 cl",price:2.5}], allergens:[]};
-EXTRA_ITEMS.boisson_orangina = {name:"Orangina", desc:"Soda divers, bouteille.", group:"Boissons",
-  sizes:[{n:1,label:"Bouteille 25 cl",price:2.5}], allergens:[]};
-EXTRA_ITEMS.boisson_icetea = {name:"Ice tea pêche", desc:"Soda divers, bouteille.", group:"Boissons",
-  sizes:[{n:1,label:"Bouteille 33 cl",price:2.5}], allergens:[]};
+EXTRA_ITEMS.boisson_orangina = {name:"Orangina", desc:"Soda divers, canette.", group:"Boissons",
+  sizes:[{n:1,label:"Canette 33 cl",price:2.5}], allergens:[]};
+EXTRA_ITEMS.boisson_icetea = {name:"Fuzetea pêche", desc:"Thé noir glacé saveur pêche, canette.", group:"Boissons",
+  sizes:[{n:1,label:"Canette 33 cl",price:2.5}], allergens:[]};
 EXTRA_ITEMS.boisson_ramune = {name:"Ramune", desc:"Soda japonais aux billes, saveur originale.", group:"Boissons",
   sizes:[{n:1,label:"Bouteille 200 ml",price:3.5}], allergens:[]};
 EXTRA_ITEMS.boisson_calpis = {name:"Calpis", desc:"Boisson japonaise lactée, goût yaourt.", group:"Boissons",
   sizes:[{n:1,label:"Bouteille 250 ml",price:3.5}], allergens:["Lait"]};
 EXTRA_ITEMS.oignon_frit = {name:"Oignon frit", desc:"Oignons frits croustillants.", group:"Autres",
   sizes:[{n:1,label:"Portion",price:0.5}], allergens:["Gluten"], plain:true};
-
+EXTRA_ITEMS.sashimi_mixte = {name:"Sashimi mixte thon saumon", desc:"Tranches de thon et de saumon frais.", group:"Sashimi",
+  sizes:[{n:4,price:9},{n:8,price:16}], allergens:["Poisson"]};
+EXTRA_ITEMS.yakitori_boeuf = {name:"Yakitori boeuf fromage", desc:"Brochettes de bœuf au fromage, sauce yakitori.", group:"Friture",
+  sizes:[{n:2,price:5},{n:4,price:9}], allergens:["Gluten","Soja","Lait"]};
+EXTRA_ITEMS.boisson_coca_zero = {name:"Coca-Cola Zéro", desc:"Sans sucres, canette.", group:"Boissons",
+  sizes:[{n:1,label:"Canette 33 cl",price:2.5}], allergens:[]};
+EXTRA_ITEMS.boisson_badoit = {name:"Badoit", desc:"Eau minérale naturelle gazeuse.", group:"Boissons",
+  sizes:[{n:1,label:"Bouteille 50 cl",price:2.5}], allergens:[]};
+EXTRA_ITEMS.boisson_evian = {name:"Evian", desc:"Eau minérale naturelle plate.", group:"Boissons",
+  sizes:[{n:1,label:"Bouteille 50 cl",price:2.5}], allergens:[]};

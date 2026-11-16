@@ -8,8 +8,8 @@ const FUSEAU = "Europe/Paris";
 
 function doPost(e) {
   const props = PropertiesService.getScriptProperties();
-  const token = props.getProperty("9001853243:AAGhaDnRTF-DrvA8cUhUptEmIm1F7yfhdO8");
-  const chat = props.getProperty("9025679648");
+  const token = props.getProperty("TG_TOKEN");
+  const chat = props.getProperty("TG_CHAT");
   const d = JSON.parse(e.postData.contents);
 
   // 1. Message de commande

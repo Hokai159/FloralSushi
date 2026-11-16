@@ -134,6 +134,10 @@ const CARTE_ONLY = {
   "Sushi Saumon Fromage": {grade:"Sushi", ing:"Saumon, fromage, riz", all:["Gluten","Soja","Poisson","Lait"], prot:["saumon"]},
   "Sushi Thon Fromage": {grade:"Sushi", ing:"Thon, fromage, riz", all:["Gluten","Soja","Poisson","Lait"], prot:["thon"]},
   "Spring Roll Légumes": {grade:"Spring", ing:"Vermicelles, carotte, chou, pousses de soja", all:["Gluten","Soja"], prot:[]},
+  "Maki Thon": {grade:"Maki", ing:"Thon, riz, feuille d'algue", all:["Gluten","Soja","Poisson"], prot:["thon"]},
+  "Maki Saumon Fromage": {grade:"Maki", ing:"Saumon, fromage, riz, feuille d'algue", all:["Gluten","Soja","Poisson","Lait"], prot:["saumon"]},
+  "Spring Roll Saumon Avocat": {grade:"Spring", ing:"Saumon, avocat, vermicelles, riz", all:["Gluten","Soja","Poisson"], prot:["saumon"]},
+  "Spring Roll Saumon Fromage": {grade:"Spring", ing:"Saumon, fromage, vermicelles, riz", all:["Gluten","Soja","Poisson","Lait"], prot:["saumon"]},
   "Spring Roll Crevette": {grade:"Spring", ing:"Crevette, vermicelles, carotte, chou", all:["Gluten","Soja","Crustacés"], prot:[]},
 };
 for (const n in CARTE_ONLY) {

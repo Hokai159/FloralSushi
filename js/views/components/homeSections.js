@@ -6,7 +6,7 @@ export function homeSections() {
     ? NOUVEAUTES.map(n => `<div class="card"><h3>${n.nom}</h3><p class="note">${n.description}</p></div>`).join("")
     : `<div class="card"><p class="note">Nos nouveautés arrivent bientôt.</p></div>`;
   const editions = EDITIONS.length
-    ? EDITIONS.map(e => `<div class="card"><span class="tag-pre">${e.periode}</span><h3>${e.titre}</h3><p class="note">${e.description}</p></div>`).join("")
+    ? EDITIONS.map(e => `<div class="card">${e.image ? `<img class="edition-img" src="${e.image}" alt="${e.titre}">` : ""}<span class="tag-pre">${e.periode}</span><h3>${e.titre}</h3><p class="note">${e.description}</p></div>`).join("")
     : `<div class="card"><span class="tag-pre">Bientôt</span><h3>Box édition limitée</h3><p class="note">Noël, Halloween, Saint-Valentin : des box spéciales, en quantité limitée.</p></div>`;
   return `
   <section class="promo-wrap" style="padding-top:clamp(32px,5vw,56px)">

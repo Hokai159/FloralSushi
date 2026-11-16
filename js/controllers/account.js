@@ -54,9 +54,9 @@ export async function saveProfile(e) {
     nom: f.get("nom"), tel: f.get("tel"), rue: f.get("rue"), numero: f.get("numero"),
     complement: f.get("complement"), cp: f.get("cp"), ville: (f.get("ville") || "").trim(),
   };
-  const ok = await upsertProfile(p);
+  const r = await upsertProfile(p);
   await refreshProfile();
-  toast(ok ? "Profil enregistré ✓" : "Enregistrement impossible, réessayez.");
+  toast(r.ok ? "Profil enregistré ✓" : r.message);
   render();
 }
 
@@ -67,9 +67,12 @@ export async function loadOrders() {
   render();
 }
 
-// Toucher un lot : rappel de la règle
-export function tapLot() {
-  toast("Ce lot se choisit dans le panier, sur votre prochaine commande.");
+// Ouvrir un coffret de fidélité : animation, puis rappel
+export function tapLot(key, el) {
+  if (el) {
+    el.classList.add("opening");
+    setTimeout(() => toast("🎁 Lot ouvert ! Il sera offert sur votre prochaine commande, dans le panier."), 500);
+  }
 }
 
 // Repasser une commande passée : remet la box et les extras dans le panier
