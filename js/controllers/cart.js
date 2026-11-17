@@ -1,3 +1,4 @@
+import { flyToBox } from "../utils/fly.js";
 import { render } from "./router.js";
 import { BOXES, PRESETS } from "../data/boxes.js";
 import { gradeOf } from "../data/menu.js";
@@ -21,13 +22,14 @@ export function chooseBox(id) {
   location.hash = "composer";
 }
 
-export function changePick(name, d) {
+export function changePick(name, d, el) {
   if (d > 0 && !canAdd(name)) {
     const b = BOXES[state.cart.box], c = counts();
     if (c.total >= b.pieces) toast("Votre box est pleine.");
     else toast("Quota " + gradeOf[name] + " atteint pour cette box.");
     return;
   }
+  if (d > 0 && el) flyToBox(el, name);
   const v = (state.cart.picks[name] || 0) + d;
   if (v <= 0) delete state.cart.picks[name]; else state.cart.picks[name] = v;
   store("fs_cart", state.cart); render();

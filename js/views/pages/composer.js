@@ -8,6 +8,7 @@ import { openItem } from "../components/modal.js";
 import { toast } from "../components/toast.js";
 import { photo } from "../../data/images.js";
 import { proteinChips } from "../components/filters.js";
+import { boxVizHtml } from "../components/boxviz.js";
 
 export function pageComposer() {
   if (!state.cart.box) return `
@@ -32,6 +33,7 @@ export function pageComposer() {
   </div></section>
   <section style="padding-top:10px"><div class="wrap">
     ${proteinChips()}
+    ${boxVizHtml(b)}
     ${GRADES.map(g => renderGrade(g)).join("")}
     <div class="dock">
       <div class="info">
@@ -60,7 +62,7 @@ export function renderGrade(g) {
       <div class="qty">
         <button onclick="changePick('${n2}',-1)" ${q?"":"disabled"} aria-label="Retirer">−</button>
         <span class="n">${q}</span>
-        <button onclick="changePick('${n2}',1)" ${canAdd(n)?"":"disabled"} aria-label="Ajouter">+</button>
+        <button onclick="changePick('${n2}',1,this)" ${canAdd(n)?"":"disabled"} aria-label="Ajouter">+</button>
       </div></div>`;
   }).join("")}
   </div>${MENU[g].some(([n]) => matchesProtein(n, state.protein)) ? "" : `<div class="notice">Aucun sushi ${g.toLowerCase()} avec ce filtre.</div>`}`;

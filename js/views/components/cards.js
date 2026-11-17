@@ -8,15 +8,15 @@ import { eur } from "../../utils/format.js";
 export const baguetteTag = b => `${b.baguettes ? `<span class="offer-tag">🥢 ${b.baguettes} paire${b.baguettes>1?"s":""} de baguettes offerte${b.baguettes>1?"s":""}</span>` : ""}${b.sauces ? `<span class="offer-tag">🥫 ${b.sauces} sauce${b.sauces>1?"s":""} offerte${b.sauces>1?"s":""}</span>` : ""}`;
 
 export function boxCards() {
+  const editions = ["edition_noel","edition_halloween","edition_stvalentin"].map((id,i) => fixedCard(id,i,false)).join("");
   const composed = ["mini","uno","duo"].map((id,i) => composedCard(id,i)).join("");
   const discovery = ["decouverte_mini","decouverte_uno","decouverte_duo"].map((id,i) => fixedCard(id,i,true)).join("");
-  const editions = ["edition_noel","edition_halloween","edition_stvalentin"].map((id,i) => fixedCard(id,i,false)).join("");
   const themed = ["full_poulet","full_fromage","full_frit"].map((id,i) => fixedCard(id,i,false)).join("");
-  return `<div class="boxes">${composed}</div>
+  return `<h3 class="sub-title reveal">Éditions limitées</h3>
+    <div class="boxes">${editions}</div>
+    <div class="boxes">${composed}</div>
     <h3 class="sub-title reveal">Box découverte, déjà faites</h3>
     <div class="boxes">${discovery}</div>
-    <h3 class="sub-title reveal">Éditions limitées</h3>
-    <div class="boxes">${editions}</div>
     <h3 class="sub-title reveal">Mini box thématiques</h3>
     <div class="boxes">${themed}</div>`;
 }

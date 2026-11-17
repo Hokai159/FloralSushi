@@ -36,6 +36,16 @@ export const IMAGES = {
   "California Saumon Avocat · crispy": "img/produits/california-saumon-avocat-crispy.webp",
   "California Saumon Fromage · crispy": "img/produits/california-saumon-fromage-crispy.webp",
   "California Tempura · crispy": "img/produits/california-tempura-crispy.webp",
+  "Ramune": "img/produits/ramune.webp",
+  "Calpis": "img/produits/calpis.webp",
+  "Baguettes à sushi": "img/produits/baguettes-sushi.webp",
+  "Oignon frit": "img/produits/oignon-frit.webp",
+  "Sauce": "img/produits/sauce-soja.webp",
+  "Mochi chocolat": "img/produits/mochi-chocolat.webp",
+  "Mochi vanille": "img/produits/mochi-vanille.webp",
+  "Oignon rings": "img/produits/oignon-rings.webp",
+  "Tempura crevettes": "img/produits/tempura-crevettes.webp",
+  "California Saumon Fromage": "img/produits/california-saumon-fromage.webp",
 };
 
 // Photo d'un produit, à placer sous son nom (vide si pas de photo)
