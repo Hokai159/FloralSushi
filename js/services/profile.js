@@ -6,6 +6,7 @@ import { authCall, loadSession } from "./auth.js";
 export async function fetchProfile() {
   if (!state.session) return null;
   const r = await authCall(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${state.session.id}&select=*`);
+  if (r.expired) { state.session = null; return null; }
   if (!r.ok) return null;
   const rows = await r.res.json();
   return rows[0] || null;

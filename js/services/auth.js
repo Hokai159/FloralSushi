@@ -50,12 +50,12 @@ async function refreshSession(session) {
 // Appel à la base avec le compte connecté ; renouvelle la connexion si le jeton a expiré
 export async function authCall(url, options = {}) {
   let session = loadSession();
-  if (!session) return {ok: false, status: 401, text: "Non connecté."};
+  if (!session) return {ok: false, status: 401, expired: true, text: "Non connecté."};
   const call = s => fetch(url, {...options, headers: {...headers(s.token), ...(options.headers || {})}});
   let res = await call(session);
   if (res.status === 401 || res.status === 403) {
     session = await refreshSession(session);
-    if (!session) return {ok: false, status: 401, text: "Votre connexion a expiré : reconnectez-vous."};
+    if (!session) return {ok: false, status: 401, expired: true, text: "Votre connexion a expiré : reconnectez-vous."};
     res = await call(session);
   }
   const text = res.ok ? "" : await res.text().catch(() => "");

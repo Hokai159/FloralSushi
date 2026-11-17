@@ -50,3 +50,19 @@ export const PRESETS = {
 };
 
 /* Extras : un seul bloc par produit, le format se choisit dans la carte */
+
+// Éditions limitées (box éphémères) : elles ne figurent pas dans la carte
+Object.assign(BOXES, {
+  edition_noel: {name:"Box Spéciale Noël", pieces:8, price:35, fixed:true, ephemere:true,
+    image:"img/editions/noel.webp", desc:"Édition limitée de décembre : saumon, fromage et makis festifs."},
+  edition_halloween: {name:"Box Halloween", pieces:8, price:30, fixed:true, ephemere:true,
+    image:"img/editions/halloween.webp", desc:"Édition limitée d'octobre : thon, tempura et makis effrayants."},
+  edition_stvalentin: {name:"Box Saint-Valentin", pieces:8, price:30, fixed:true, ephemere:true,
+    image:"img/editions/saint-valentin.webp", desc:"Édition limitée de février : saumon fromage, à partager en amoureux."},
+});
+Object.assign(PRESETS, {
+  edition_noel: {"Sushi Saumon":2, "Sushi Saumon Fromage":2, "Maki Saumon":2, "California Saumon Avocat":2},
+  edition_halloween: {"California Tempura":2, "Maki Thon":2, "Sushi Thon":2, "California Thon Avocat":2},
+  edition_stvalentin: {"Sushi Saumon Fromage":2, "Spring Roll Saumon Fromage":2, "Maki Saumon Fromage":2, "California Saumon Fromage":2},
+});
+

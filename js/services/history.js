@@ -6,6 +6,7 @@ import { authCall } from "./auth.js";
 export async function fetchMyOrders() {
   if (!state.session) return [];
   const r = await authCall(`${SUPABASE_URL}/rest/v1/orders?customer_id=eq.${state.session.id}&select=*&order=created_at.desc`);
+  if (r.expired) { state.session = null; return []; }
   return r.ok ? r.res.json() : [];
 }
 

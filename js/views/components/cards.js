@@ -10,10 +10,13 @@ export const baguetteTag = b => `${b.baguettes ? `<span class="offer-tag">🥢 $
 export function boxCards() {
   const composed = ["mini","uno","duo"].map((id,i) => composedCard(id,i)).join("");
   const discovery = ["decouverte_mini","decouverte_uno","decouverte_duo"].map((id,i) => fixedCard(id,i,true)).join("");
+  const editions = ["edition_noel","edition_halloween","edition_stvalentin"].map((id,i) => fixedCard(id,i,false)).join("");
   const themed = ["full_poulet","full_fromage","full_frit"].map((id,i) => fixedCard(id,i,false)).join("");
   return `<div class="boxes">${composed}</div>
     <h3 class="sub-title reveal">Box découverte, déjà faites</h3>
     <div class="boxes">${discovery}</div>
+    <h3 class="sub-title reveal">Éditions limitées</h3>
+    <div class="boxes">${editions}</div>
     <h3 class="sub-title reveal">Mini box thématiques</h3>
     <div class="boxes">${themed}</div>`;
 }
@@ -23,6 +26,7 @@ export function composedCard(id, i) {
   return `
     <div class="box reveal" style="transition-delay:${i*90}ms">
       <span class="num">${b.pieces}</span>
+      ${b.image ? `<img class="edition-img" src="${b.image}" alt="${b.name}">` : ""}
       <h3>${b.name}</h3>
       <p>${b.desc}</p>${baguetteTag(b)}
       <p style="font-weight:600;margin-top:10px">Classique ${b.quota.Classique} · Signature ${b.quota.Signature}</p>
@@ -36,6 +40,7 @@ export function fixedCard(id, i, dark) {
   return `
     <div class="box ${dark?"dark":""} reveal" style="transition-delay:${i*90}ms">
       <span class="num">${b.pieces}</span>
+      ${b.image ? `<img class="edition-img" src="${b.image}" alt="${b.name}">` : ""}
       <h3>${b.name}</h3>
       <p>${b.desc}</p>${baguetteTag(b)}
       <div class="price">${eur(b.price)}</div>
