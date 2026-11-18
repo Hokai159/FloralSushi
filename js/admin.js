@@ -14,11 +14,19 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt
 const eur = n => Number(n || 0).toFixed(2).replace(".", ",") + " €";
 const headers = () => ({ apikey: SUPABASE_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json" });
 
-function afficherLogin() {
+// Vérifie dans la base que le compte connecté est bien un administrateur
+async function estAdmin() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/admins?select=email`, { headers: headers() });
+  if (!res.ok) return false;
+  const rows = await res.json();
+  return rows.length > 0;
+}
+
+function afficherLogin(message) {
   app.innerHTML = `
     <form class="login" id="loginForm">
       <h1>Admin Floral Sushi</h1>
-      <p>Connectez-vous pour voir les commandes.</p>
+      <p>${message || "Connectez-vous pour voir les commandes."}</p>
       <label>Email</label><input name="email" type="email" required autocomplete="username">
       <label>Mot de passe</label><input name="password" type="password" required autocomplete="current-password">
       <button type="submit">Se connecter</button>
@@ -38,14 +46,18 @@ async function connexion(e) {
   if (!res.ok || !data.access_token) { alert("Email ou mot de passe incorrect."); return; }
   token = data.access_token;
   sessionStorage.setItem("fs_admin_token", token);
+  if (!(await estAdmin())) {
+    deconnexion("Ce compte n'a pas accès à l'administration.");
+    return;
+  }
   demarrer();
 }
 
-function deconnexion() {
+function deconnexion(message) {
   token = null;
   sessionStorage.removeItem("fs_admin_token");
   clearInterval(timer);
-  afficherLogin();
+  afficherLogin(message);
 }
 
 function afficherApp() {
@@ -175,4 +187,9 @@ function demarrer() {
   timer = setInterval(charger, REFRESH_MS);
 }
 
-token ? demarrer() : afficherLogin();
+async function initialiser() {
+  if (!token) return afficherLogin();
+  if (await estAdmin()) demarrer();
+  else deconnexion("Session invalide ou accès refusé. Reconnectez-vous.");
+}
+initialiser();
